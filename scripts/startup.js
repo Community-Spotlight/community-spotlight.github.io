@@ -62,7 +62,7 @@ EventEmitter.on("tab-click", (name) => {
     childs[1].textContent = "Back to Home";
 
     const nav = document.querySelector(`nav[class="nav-bar"]`)
-    nav.insertBefore(homeBtn, nav.children[2]);
+    nav.insertBefore(homeBtn, copyableBtn);
     homeBtn.addEventListener("click", () => {
       setTab("home");
       EventEmitter.emit("tab-click", "home");
