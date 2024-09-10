@@ -5,6 +5,7 @@ body {
 	font-size: 18px;
 	font-family: arial;
 	overflow: scroll;
+	overflow-x: auto;
 }
 
 .nav-bar {
