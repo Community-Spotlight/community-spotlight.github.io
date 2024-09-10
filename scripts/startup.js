@@ -54,7 +54,7 @@ EventEmitter.on("mode-switch", (val) => {
 EventEmitter.on("tab-click", (name) => {
   const createHomeBtn = (copyableBtn) => {
     const existingBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
-    if (existingBtn !== null) return;
+    if (existingBtn !== null) existingBtn.remove();
     const homeBtn = copyableBtn.cloneNode(true);
     const childs = homeBtn.children;
     homeBtn.id = "home";
@@ -62,7 +62,7 @@ EventEmitter.on("tab-click", (name) => {
     childs[1].textContent = "Back to Home";
 
     const nav = document.querySelector(`nav[class="nav-bar"]`)
-    nav.insertBefore(homeBtn, copyableBtn);
+    nav.insertBefore(homeBtn, nav.children[2]);
     homeBtn.addEventListener("click", () => {
       setTab("home");
       EventEmitter.emit("tab-click", "home");
@@ -83,12 +83,7 @@ EventEmitter.on("tab-click", (name) => {
 // Tab Loader
 const params = new URLSearchParams(window.location.search);
 let thisPage = params.get("page");
-if (!thisPage) {
-  params.set("page", "home");
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
-  window.history.replaceState({}, "", newUrl);
-  thisPage = "home";
-}
+if (!thisPage) thisPage = "home";
 setTab(thisPage);
 
 /*
@@ -120,6 +115,10 @@ function setTab(name) {
         return "home";
     }
   })();
+  params.set("page", thisPage);
+  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  window.history.replaceState({}, "", newUrl);
+
   const script = document.createElement("script");
   script.id = "page-loader";
   script.src = `/site-real/scripts/${thisPage}-page.js`;
