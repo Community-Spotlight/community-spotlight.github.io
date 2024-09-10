@@ -8,7 +8,7 @@ else csStorage = (() => {
     console.warn("Storage Error, couldnt parse JSON");
     return { dark: true };
   }
-})()
+})();
 
 /*
   save csStorage to localStorage (publicly accessible)
@@ -53,8 +53,8 @@ EventEmitter.on("mode-switch", (val) => {
 
 EventEmitter.on("tab-click", (name) => {
   const createHomeBtn = (copyableBtn) => {
-    const existingBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
-    if (existingBtn !== null) existingBtn.remove();
+    const oldBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
+    if (oldBtn !== null) oldBtn.remove();
     const homeBtn = copyableBtn.cloneNode(true);
     const childs = homeBtn.children;
     homeBtn.id = "home";
@@ -62,7 +62,7 @@ EventEmitter.on("tab-click", (name) => {
     childs[1].textContent = "Back to Home";
 
     const nav = document.querySelector(`nav[class="nav-bar"]`)
-    nav.insertBefore(homeBtn, nav.children[2]);
+    nav.insertBefore(homeBtn, copyableBtn);
     homeBtn.addEventListener("click", () => {
       setTab("home");
       EventEmitter.emit("tab-click", "home");
