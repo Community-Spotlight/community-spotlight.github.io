@@ -1,7 +1,7 @@
 /*
   Community Spotlight About Page
 */
-const descriptionTxts = {
+let descriptionTxts = {
   abt: `
 Community Spotlight is a non-profit Project that is aimed towards providing free Promotional Content to Everyone.\n
 
@@ -42,5 +42,5 @@ contactTxt.classList = "inner-txt";
 contactTxt.innerHTML = descriptionTxts.contact.trim();
 
 // Append to Content Body
-newBody.append(cssScript, aboutTitle, aboutTxt, makeBreak(), contactTitle, contactTxt);
+newBody.append(aboutTitle, aboutTxt, makeBreak(), contactTitle, contactTxt);
 document.body.appendChild(newBody);
