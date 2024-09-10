@@ -127,6 +127,11 @@ function setTab(name) {
   document.body.appendChild(script);
 }
 
+// Create a new BR element (used in pages)
+const makeBreak = () => {
+  return document.createElement("br");
+}
+
 // Buttons
 // light/dark mode
 const modeBtn = document.querySelector(`div[id="mode-switch"]`);
