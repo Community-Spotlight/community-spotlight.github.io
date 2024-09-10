@@ -58,6 +58,7 @@ EventEmitter.on("tab-click", (name) => {
     const homeBtn = copyableBtn.cloneNode(true);
     const childs = homeBtn.children;
     homeBtn.id = "home";
+    homeBtn.style.boxShadow = "inset 0 -5px 0 0 #0391a3";
     childs[0].src = "/site-real/assets/home.svg";
     childs[1].textContent = "Back to Home";
 
@@ -69,6 +70,7 @@ EventEmitter.on("tab-click", (name) => {
       homeBtn.remove();
     });
   };
+
   const navBtns = document.querySelectorAll(`div[class="nav-btn"]`);
   for (let i = 1; i < navBtns.length; i++) {
     const btn = navBtns[i];
