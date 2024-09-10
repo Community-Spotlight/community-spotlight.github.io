@@ -108,7 +108,7 @@ function setTab(name) {
     // in case we add more pages
     switch (name) {
       case "about": return "about";
-      case "sumbit": return "sumbit";
+      case "submit": return "submit";
       case "exports": return "exports";
       case "tos": return "tos";
       case "team": return "team";
