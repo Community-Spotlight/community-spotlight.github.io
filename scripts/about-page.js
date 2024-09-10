@@ -1,10 +1,6 @@
 /*
   Community Spotlight About Page
 */
-const makeBreak = () => {
-  return document.createElement("br");
-};
-
 const descriptionTxts = {
   abt: `
 Community Spotlight is a non-profit Project that is aimed towards providing free Promotional Content to Everyone.\n
@@ -26,12 +22,6 @@ Or by Emailing us at:\n
 // Main New Body
 const newBody = document.createElement("div");
 newBody.classList = "content-body";
-
-// Load CSS
-const cssScript = document.createElement("link")
-cssScript.href = "site-real/css/pages.css";
-cssScript.rel="stylesheet";
-cssScript.type="text/css";
 
 // About Us
 const aboutTitle = document.createElement("div");
