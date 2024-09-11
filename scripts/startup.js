@@ -141,7 +141,7 @@ attachBtnListeners();
   clone a nav button and replace it with a "home" button
   copyableBtn -- nav element to clone
 */
-function createHomeBtn (copyableBtn) => {
+function createHomeBtn(copyableBtn) {
   const oldBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
   if (oldBtn !== null) oldBtn.remove();
   const homeBtn = copyableBtn.cloneNode(true);
