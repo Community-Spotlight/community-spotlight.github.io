@@ -112,9 +112,7 @@ function setTab(name) {
       case "exports": return "exports";
       case "tos": return "tos";
       case "team": return "team";
-      default:
-        // home page
-        return "home";
+      default: return "home";
     }
   })();
   params.set("page", thisPage);
@@ -125,6 +123,7 @@ function setTab(name) {
   script.id = "page-loader";
   script.src = `/site-real/scripts/${thisPage}-page.js`;
   document.body.appendChild(script);
+  EventEmitter.emit("tab-click", thisPage);
 }
 
 // Create a new BR element (used in pages)
@@ -149,8 +148,5 @@ if (csStorage.dark === false) EventEmitter.emit("mode-switch", csStorage.dark);
 const navBtns = document.querySelectorAll(`div[class="nav-btn"]`);
 for (let i = 1; i < navBtns.length; i++) {
   const btn = navBtns[i];
-  btn.addEventListener("click", () => {
-    setTab(btn.id || "home");
-    EventEmitter.emit("tab-click", thisPage);
-  });
+  btn.addEventListener("click", () => setTab(btn.id || "home"));
 }
