@@ -32,12 +32,19 @@ body {
 	font-size: 18px;
 	font-weight: 900;
 	border-right: dashed white 2px;
+	cursor: pointer;
 }
-
 .logo img {
 	height: 80%;
 	max-height: 80%;
 	border-radius: 50%;
+}
+.logo:hover {
+	background: rgba(0, 0, 0, 0.3);
+	text-shadow: 0px 0px 8px #fff;
+}
+.logo:hover img {
+	filter: drop-shadow(0px 0px 8px #fff);
 }
 
 .nav-btn {
@@ -49,23 +56,19 @@ body {
 	align-items: center;
 	justify-content: center;
 }
-
 .nav-btn img {
 	height: 20px;
 	width: 20px;
 	margin: 5px;
 }
-
 .nav-btn span {
 	font-size: 0.5em;
 	margin-right: 5px;
 }
-
 .nav-btn:hover {
 	background: rgba(0, 0, 0, 0.3);
 	text-shadow: 0px 0px 8px #fff;
 }
-
 .nav-btn:hover img {
 	filter: drop-shadow(0px 0px 8px #fff);
 }
