@@ -1,4 +1,4 @@
-// Storage
+// Storage (Public)
 let csStorage = localStorage.getItem("CS-Storage");
 if (csStorage === null) csStorage = { dark: true };
 else csStorage = (() => {
@@ -17,7 +17,7 @@ function saveStorage() {
   localStorage.setItem("CS-Storage", JSON.stringify(csStorage));
 }
 
-// Global Event Emitter
+// Event Emitter (Public)
 const EventEmitter = (() => {
   const events = {};
   return {
@@ -52,25 +52,6 @@ EventEmitter.on("mode-switch", (val) => {
 });
 
 EventEmitter.on("tab-click", (name) => {
-  const createHomeBtn = (copyableBtn) => {
-    const oldBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
-    if (oldBtn !== null) oldBtn.remove();
-    const homeBtn = copyableBtn.cloneNode(true);
-    const childs = homeBtn.children;
-    homeBtn.id = "home";
-    homeBtn.style.boxShadow = "inset 0 -5px 0 0 #0391a3";
-    childs[0].src = "/site-real/assets/home.svg";
-    childs[1].textContent = "Back to Home";
-
-    const nav = document.querySelector(`nav[class="nav-bar"]`)
-    nav.insertBefore(homeBtn, copyableBtn);
-    homeBtn.addEventListener("click", () => {
-      setTab("home");
-      EventEmitter.emit("tab-click", "home");
-      homeBtn.remove();
-    });
-  };
-
   const navBtns = document.querySelectorAll(`div[class="nav-btn"]`);
   for (let i = 1; i < navBtns.length; i++) {
     const btn = navBtns[i];
@@ -82,9 +63,9 @@ EventEmitter.on("tab-click", (name) => {
   }
 });
 
-// Tab Loader
-const params = new URLSearchParams(window.location.search);
-let thisPage = params.get("page");
+// Tab Loader (Public variables)
+const siteParams = new URLSearchParams(window.location.search);
+let thisPage = siteParams.get("page");
 if (!thisPage) thisPage = "home";
 setTab(thisPage);
 
@@ -115,8 +96,8 @@ function setTab(name) {
       default: return "home";
     }
   })();
-  params.set("page", thisPage);
-  const newUrl = `${window.location.pathname}?${params.toString()}`;
+  siteParams.set("page", thisPage);
+  const newUrl = `${window.location.pathname}?${siteParams.toString()}`;
   window.history.replaceState({}, "", newUrl);
 
   const script = document.createElement("script");
@@ -126,27 +107,60 @@ function setTab(name) {
   EventEmitter.emit("tab-click", thisPage);
 }
 
-// Create a new BR element (used in pages)
-const makeBreak = () => {
-  return document.createElement("br");
+// Attach Button Listeners
+function attachBtnListeners() {
+  // logo button (home)
+  const logoBtn = document.querySelector(`nav[class="nav-bar"] div[class="logo"]`)
+  logoBtn.addEventListener("click", () => {
+    setTab("home");
+    EventEmitter.emit("tab-click", "home");
+  });
+
+  // light/dark mode
+  const modeBtn = document.querySelector(`div[id="mode-switch"]`);
+  const childs = modeBtn.children;
+  modeBtn.setAttribute("darkMode", csStorage.dark);
+  modeBtn.addEventListener("click", () => {
+    const val = !(modeBtn.getAttribute("darkMode") === "true");
+    csStorage.dark = val;
+    EventEmitter.emit("mode-switch", val);
+    saveStorage();
+  });
+  if (csStorage.dark === false) EventEmitter.emit("mode-switch", csStorage.dark);
+
+  // other buttons
+  const navBtns = document.querySelectorAll(`div[class="nav-btn"]`);
+  for (let i = 1; i < navBtns.length; i++) {
+    const btn = navBtns[i];
+    btn.addEventListener("click", () => setTab(btn.id || "home"));
+  }
+}
+attachBtnListeners();
+
+/*
+  clone a nav button and replace it with a "home" button
+  copyableBtn -- nav element to clone
+*/
+function createHomeBtn (copyableBtn) => {
+  const oldBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
+  if (oldBtn !== null) oldBtn.remove();
+  const homeBtn = copyableBtn.cloneNode(true);
+  const childs = homeBtn.children;
+  homeBtn.id = "home";
+  homeBtn.style.boxShadow = "inset 0 -5px 0 0 #0391a3";
+  childs[0].src = "/site-real/assets/home.svg";
+  childs[1].textContent = "Back to Home";
+
+  const nav = document.querySelector(`nav[class="nav-bar"]`)
+  nav.insertBefore(homeBtn, copyableBtn);
+  homeBtn.addEventListener("click", () => {
+    setTab("home");
+    EventEmitter.emit("tab-click", "home");
+    homeBtn.remove();
+  });
 }
 
-// Buttons
-// light/dark mode
-const modeBtn = document.querySelector(`div[id="mode-switch"]`);
-const childs = modeBtn.children;
-modeBtn.setAttribute("darkMode", csStorage.dark);
-modeBtn.addEventListener("click", () => {
-  const val = !(modeBtn.getAttribute("darkMode") === "true");
-  csStorage.dark = val;
-  EventEmitter.emit("mode-switch", val);
-  saveStorage();
-});
-if (csStorage.dark === false) EventEmitter.emit("mode-switch", csStorage.dark);
-
-// other buttons
-const navBtns = document.querySelectorAll(`div[class="nav-btn"]`);
-for (let i = 1; i < navBtns.length; i++) {
-  const btn = navBtns[i];
-  btn.addEventListener("click", () => setTab(btn.id || "home"));
-}
+/*
+  create a new BR element (used in pages)
+*/
+const makeBreak = () => { return document.createElement("br") };
