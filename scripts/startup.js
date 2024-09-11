@@ -112,6 +112,8 @@ function attachBtnListeners() {
   // logo button (home)
   const logoBtn = document.querySelector(`nav[class="nav-bar"] div[class="logo"]`)
   logoBtn.addEventListener("click", () => {
+    const anyHomeBtn = document.querySelector(`div[class="nav-btn"][id="home"]`);
+    if (anyHomeBtn !== null) anyHomeBtn.remove();
     setTab("home");
     EventEmitter.emit("tab-click", "home");
   });
