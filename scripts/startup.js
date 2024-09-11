@@ -44,8 +44,8 @@ const EventEmitter = (() => {
 })();
 
 // Pre-done Events
-EventEmitter.on("mode-switch", (val) => {
-  modeBtn.setAttribute("darkMode", val);
+EventEmitter.on("mode-switch", (val, btn, childs) => {
+  btn.setAttribute("darkMode", val);
   childs[0].src = val === false ? "/site-real/assets/dark.svg" : "/site-real/assets/light.svg";
   childs[1].textContent = val === false ? "Dark Mode" : "Light Mode";
   document.body.style.background = val === false ? "#fff" : "#141414";
@@ -125,10 +125,10 @@ function attachBtnListeners() {
   modeBtn.addEventListener("click", () => {
     const val = !(modeBtn.getAttribute("darkMode") === "true");
     csStorage.dark = val;
-    EventEmitter.emit("mode-switch", val);
+    EventEmitter.emit("mode-switch", val, modeBtn, childs);
     saveStorage();
   });
-  if (csStorage.dark === false) EventEmitter.emit("mode-switch", csStorage.dark);
+  if (csStorage.dark === false) EventEmitter.emit("mode-switch", csStorage.dark, modeBtn, childs);
 
   // other buttons
   const navBtns = document.querySelectorAll(`div[class="nav-btn"]`);
