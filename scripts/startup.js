@@ -114,14 +114,20 @@
         globalEvents.emit('tab-switch', 'home');
       };
       this.theme.dataset.dark = String(csStorage.data.dark);
+      this.theme.onmousedown = () => this.theme.setAttribute('aria-pressed', 'true');
       this.theme.onclick = () => {
         const val = !(this.theme.dataset.dark == 'true');
         csStorage.data.dark = val;
         globalEvents.emit('theme-switch', val, this.theme, this.theme.children);
         csStorage.refresh(csStorage.data);
       };
+      this.theme.onmouseup = () => this.theme.setAttribute('aria-pressed', 'false');
       if (!csStorage.data.dark) globalEvents.emit('theme-switch', csStorage.data.dark, this.theme, this.theme.children);
-      for (const btn of this.buttons) btn.onclick = function() { globalEvents.emit('tab-switch', this.dataset.name); };
+      for (const btn of this.buttons) {
+        btn.onmousedown = function() { this.setAttribute('aria-pressed', 'true'); };
+        btn.onclick = function() { globalEvents.emit('tab-switch', this.dataset.name); };
+        btn.onmouseup = function() { this.setAttribute('aria-pressed', 'false'); };
+      }
     };
     this.spawn = function(name, copyableBtn) {
       switch(name) {
@@ -133,6 +139,8 @@
           this.home.children[0].src = './assets/home.svg';
           this.home.children[1].textContent = 'Back to Home';
           this.home.style.boxShadow = 'inset 0 -5px 0 0 #0391a3';
+          this.home.role = 'button';
+          this.home.setAttribute('aria-pressed', 'true');
           this.node.insertBefore(this.home, copyableBtn);
           this.home.onclick = () => {
             globalEvents.emit('tab-switch', 'home');
