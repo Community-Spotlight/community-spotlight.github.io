@@ -71,6 +71,7 @@ window.GUI = new (function() {
     children[0].src = val === false ? './assets/dark.svg' : './assets/light.svg';
     children[1].textContent = val === false ? 'Dark Mode' : 'Light Mode';
     document.body.style.background = val === false ? '#ffffff' : '#141414';
+    document.body.style.color = val === false ? '#000000' : '#ffffff';
   });
   this.globalEvents.on('tab-switch', (name) => {
     for (const btn of this.nav.buttons) {
