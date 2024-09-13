@@ -113,6 +113,7 @@ window.GUI = new (function() {
     this.acquire = function() {
       this.reset();
       const body = document.createElement('div');
+      body.classList = 'content-body';
       document.body.appendChild(body);
       this.contentBody.set(body);
       return body;
