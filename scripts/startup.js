@@ -152,7 +152,7 @@ window.GUI = new (function() {
   
   this.nav = new (function(GUI) {
     const { tab, globalEvents, csStorage } = GUI;
-    this.buttons = [];
+    this.buttons = Array.from(document.querySelectorAll('nav.nav-btn'));
     this.node = document.querySelector('nav.nav-bar');
     this.logo = document.querySelector('nav.nav-bar div.logo');
     this.theme = document.querySelector('div#theme-switch');
