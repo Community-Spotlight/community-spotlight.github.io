@@ -49,6 +49,7 @@
       if (btn.dataset.name !== 'home') {
         this.nav.spawn('home', btn);
         btn.style.display = 'none';
+        btn.setAttribute('aria-pressed', 'false');
       }
     }
     this.tab.set(name);
