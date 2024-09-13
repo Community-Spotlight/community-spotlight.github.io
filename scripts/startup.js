@@ -128,6 +128,10 @@ window.GUI = new (function() {
         if (!node) return this.node = document.querySelector('div.content-body');
         this.node = node;
       };
+      this.remove = function() {
+        this.node.remove();
+        this.node = null;
+      };
       this.removeScripts = function() {
         let script;
         while(script && (script = this.scripts.shift())) script.remove();
