@@ -22,7 +22,7 @@
 
   // Main New Body
   const newBody = document.createElement("div");
-  GUI.tab.contentBody = newBody;
+  GUI.tab.contentBody.set(newBody);
   newBody.classList = "content-body";
 
   // About Us
