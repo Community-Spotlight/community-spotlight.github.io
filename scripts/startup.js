@@ -138,7 +138,7 @@ window.GUI = new (function() {
       script.id = 'page-loader';
       this.contentBody.scripts.push(script);
     };
-  })(GUI, GUI_Imports);
+  })(this, GUI_Imports);
   
   this.nav = new (function(GUI) {
     const { tab, globalEvents, csStorage } = GUI;
