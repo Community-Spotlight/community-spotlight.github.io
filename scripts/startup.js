@@ -1,81 +1,46 @@
 window.GUI_Imports = new (function() {
+  const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
+  this.hasOwn = hasOwn;
   this.URLParams = new URLSearchParams(window.location.search);
-  this.EventEmitter = class EventEmitter {
-    _eventHandlers = {};
-    isValidType(type) {
-      return typeof type === 'string';
+  this.EventEmitter = class EventEmitter extends EventTarget {
+    constructor() {
+      super();
+      this.events = Object.create(null);
     }
-    isValidHandler(handler) {
-      return typeof handler === 'function';
+    register(eventName) {
+      this.events[eventName] = [];
     }
-    on(type, handler) {
-      if (!type || !handler) return false;
-      if (!this.isValidType(type)) return false;
-      if (!this.isValidHandler(handler)) return false;
-      let handlers = this._eventHandlers[type];
-      if (!handlers) handlers = this._eventHandlers[type] = [];
-      if (handlers.indexOf(handler) >= 0) return false;
-      handler._once = false;
-      handlers.push(handler);
-      return true;
-    }
-    once(type, handler) {
-      if (!type || !handler) return false;
-      if (!this.isValidType(type)) return false;
-      if (!this.isValidHandler(handler)) return false;
-      const ret = this.on(type, handler);
-      if (ret) handler._once = true;
-      return ret;
-    }
-    off(type, handler) {
-      if (!type) return this.offAll();
-      if (!handler) {
-        this._eventHandlers[type] = [];
-        return;
-      }
-      if (!this.isValidType(type)) return;
-      if (!this.isValidHandler(handler)) return;
-      const handlers = this._eventHandlers[type];
-      if (!handlers || !handlers.length) return;
-      for (let i = 0; i < handlers.length; i++) {
-        const fn = handlers[i];
-        if (fn === handler) {
-          handlers.splice(i, 1);
-          break;
+    emit(eventName, ...data) {
+      if (!hasOwn(this.events, eventName)) this.register(eventName);
+      const events = this.events[eventName];
+      let popped = 0;
+      for (let i = 0; i < events.length; i++) {
+        const event = events[i - popped];
+        event.callback(...data);
+        if (event.deleteWhenCalled) {
+          events.pop(i - popped);
+          popped++;
         }
       }
     }
-    offAll() {
-      this._eventHandlers = {};
+    on(eventName, callback) {
+      if (!hasOwn(this.events, eventName)) this.register(eventName);
+      this.events[eventName].push({
+        deleteWhenCalled: false,
+        callback,
+      });
     }
-    emit(type, data) {
-      if (!type || !this.isValidType(type)) return;
-      const handlers = this._eventHandlers[type];
-      if (!handlers || !handlers.length) return;
-      const event = this.createEvent(type, data);
-      for (const handler of handlers) {
-        if (!this.isValidHandler(handler)) continue;
-        if (handler._once) event.once = true;
-        handler(event);
-        if (event.once) this.off(type, handler);
-      }
+    once(eventName, callback) {
+      if (!hasOwn(this.events, eventName)) this.register(eventName);
+      this.events[eventName].push({
+        deleteWhenCalled: true,
+        callback,
+      });
     }
-    has(type, handler) {
-      if (!type || !this.isValidType(type)) return false;
-      const handlers = this._eventHandlers[type];
-      if (!handlers || !handlers.length) return false;
-      if (!handler || !this.isValidHandler(handler)) return true;
-      return handlers.indexOf(handler) >= 0;
+    wipe() {
+      for (const event in events) events[event] = [];
     }
-    getHandlers(type) {
-      if (!type || !this.isValidType(type)) return [];
-      return this._eventHandlers[type] || [];
-    }
-    createEvent(type, data, once = false) {
-      const event = { type, data, timestamp: Date.now(), once };
-      return event;
-    }
-  }
+  };
 })();
 window.GUI = new (function() {
   this.globalEvents = new GUI_Imports.EventEmitter();
@@ -87,21 +52,22 @@ window.GUI = new (function() {
     this.data = null;
     this.refresh = function(update) {
       if (update) {
-        this.data = update;
+        this.data = typeof update === 'string' ? JSON.parse(update) : update;
         localStorage.setItem(key, JSON.stringify(this.data));
+        return;
       }
       try {
-        return JSON.parse(localStorage.getItem(key));
+        this.data = JSON.parse(localStorage.getItem(key));
       } catch {
         console.warn('Storage Error, couldnt parse JSON');
         this.refresh(this.defaultConfig);
       }
     };
-    this.refresh();
+    this.refresh(localStorage.getItem(key) || defaultConfig);
   })();
   
   this.globalEvents.on('theme-switch', (val, btn, children) => {
-    btn.setAttribute('darkMode', val);
+    btn.dataset.dark = val;
     children[0].src = val === false ? './assets/dark.svg' : './assets/light.svg';
     children[1].textContent = val === false ? 'Dark Mode' : 'Light Mode';
     document.body.style.background = val === false ? '#ffffff' : '#141414';
@@ -117,9 +83,10 @@ window.GUI = new (function() {
         btn.style.display = 'none';
       }
     }
+    this.tab.set(name);
   });
   
-  this.tab = new (function(GUI, GUI_Imports) {
+  this.tab = new (function(GUI_Imports) {
     this.current = GUI_Imports.URLParams.get('page') || 'home';
     this.contentBody = new (function() {
       this.scripts = [];
@@ -153,41 +120,39 @@ window.GUI = new (function() {
       script.src = `./scripts/${name}-page.js`;
       this.contentBody.scripts.push(script);
       document.body.appendChild(script);
-      GUI.globalEvents.emit('tab-switch', name);
     };
-  })(this, GUI_Imports);
-  this.tab.set(this.tab.current);
+  })(GUI_Imports);
   
   this.nav = new (function(GUI) {
     const { tab, globalEvents, csStorage } = GUI;
-    this.buttons = Array.from(document.querySelectorAll('nav.nav-btn'));
+    this.buttons = Array.from(document.querySelectorAll('div.nav-btn'));
+    this.buttons.shift();
     this.node = document.querySelector('nav.nav-bar');
     this.logo = document.querySelector('nav.nav-bar div.logo');
-    this.theme = document.querySelector('div#theme-switch');
+    this.theme = document.querySelector('div[data-name="theme-switch"]');
     this.home = document.querySelector(`div.nav-btn[data-name="home"]`)
     this.attachListeners = function() {
-      this.logo.addEventListener('click', () => {
+      this.logo.onclick = () => {
         if (this.home) {
           this.home.remove();
           this.home = null;
         };
-        tab.set('home');
         globalEvents.emit('tab-switch', 'home');
-      });
-      this.mode.dataset.dark = String(csStorage.data.dark);
-      this.mode.addEventListener('click', () => {
-        const val = !(this.mode.dataset.dark == 'true');
+      };
+      this.theme.dataset.dark = String(csStorage.data.dark);
+      this.theme.onclick = () => {
+        const val = !(this.theme.dataset.dark == 'true');
         csStorage.data.dark = val;
-        globalEvents.emit('theme-switch', val, this.mode, this.mode.children);
+        globalEvents.emit('theme-switch', val, this.theme, this.theme.children);
         csStorage.refresh(csStorage.data);
-      });
-      if (!csStorage.data.dark) globalEvents.emit('theme-switch', csStorage.data.dark, this.mode, this.mode.children);
-      for (const btn of this.buttons) btn.addEventListener('click', () => tab.set(btn.dataset.name || 'home'));
+      };
+      if (!csStorage.data.dark) globalEvents.emit('theme-switch', csStorage.data.dark, this.theme, this.theme.children);
+      for (const btn of this.buttons) btn.onclick = function() { globalEvents.emit('tab-switch', this.dataset.name); };
     };
     this.spawn = function(name, copyableBtn) {
       switch(name) {
         case 'home': {
-          this.home.remove();
+          if (this.home) this.home.remove();
           this.home = null;
           this.home = copyableBtn.cloneNode(true);
           this.home.dataset.name = 'home';
@@ -195,15 +160,15 @@ window.GUI = new (function() {
           this.home.children[1].textContent = 'Back to Home';
           this.home.style.boxShadow = 'inset 0 -5px 0 0 #0391a3';
           this.node.insertBefore(this.home, copyableBtn);
-          this.home.addEventListener('click', () => {
-            tab.set('home');
+          this.home.onclick = () => {
             globalEvents.emit('tab-switch', 'home');
             this.home.remove();
-          });
+          };
         };
       }
     };
   })(this);
+  this.tab.set(this.tab.current);
   this.nav.attachListeners();
 
   this.makeBreak = () => document.createElement("br");
