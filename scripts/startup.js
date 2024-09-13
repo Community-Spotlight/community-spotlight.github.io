@@ -169,7 +169,7 @@ window.GUI = new (function() {
       }
     };
   })(this);
-  this.tab.set(this.tab.current);
+  this.globalEvents.emit('tab-switch', this.tab.current);
   this.nav.attachListeners();
 
   this.makeBreak = () => document.createElement("br");
