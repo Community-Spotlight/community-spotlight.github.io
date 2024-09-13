@@ -9,7 +9,6 @@
     });
     return node;
   };
-  await (this.importScript('./scripts/imports.js').loadPromise);
   await (this.importScript('./scripts/nav.js').loadPromise);
   this.globalEvents = new GUI_Imports.EventEmitter();
   this.csStorage = new (function() {
