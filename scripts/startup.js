@@ -108,7 +108,10 @@ window.GUI = new (function() {
   });
   this.globalEvents.on('tab-switch', (name) => {
     for (const btn of this.nav.buttons) {
-      if (btn.dataset.name !== name) btn.style.display = '', continue;
+      if (btn.dataset.name !== name) {
+        btn.style.display = '';
+        continue;
+      }
       if (btn.dataset.name !== 'home') {
         this.nav.spawn('home', btn);
         btn.style.display = 'none';
