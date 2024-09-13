@@ -129,6 +129,7 @@ window.GUI = new (function() {
         this.node = node;
       };
       this.remove = function() {
+        if (!this.node) return;
         this.node.remove();
         this.node = null;
       };
