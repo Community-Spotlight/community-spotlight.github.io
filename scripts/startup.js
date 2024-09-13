@@ -110,6 +110,13 @@ window.GUI = new (function() {
       this.contentBody.remove();
       this.contentBody.removeScripts();
     };
+    this.acquire = function() {
+      this.reset();
+      const body = document.createElement('div');
+      document.body.appendChild(body);
+      this.contentBody.set(body);
+      return body;
+    };
     this.set = function(name) {
       this.reset();
       GUI_Imports.URLParams.set('page', name);
@@ -172,5 +179,5 @@ window.GUI = new (function() {
   this.globalEvents.emit('tab-switch', this.tab.current);
   this.nav.attachListeners();
 
-  this.makeBreak = () => document.createElement("br");
+  this.makeBreak = () => document.createElement('br');
 })();
