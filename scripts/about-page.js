@@ -43,6 +43,6 @@
   contactTxt.innerHTML = descriptionTxts.contact.trim();
 
   // Append to Content Body
-  newBody.append(aboutTitle, aboutTxt, makeBreak(), contactTitle, contactTxt);
+  newBody.append(aboutTitle, aboutTxt, GUI.makeBreak(), contactTitle, contactTxt);
   document.body.appendChild(newBody);
 })();
