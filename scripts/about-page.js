@@ -21,9 +21,7 @@
   };
 
   // Main New Body
-  const newBody = document.createElement("div");
-  GUI.tab.contentBody.set(newBody);
-  newBody.classList = "content-body";
+  const newBody = GUI.tab.acquire();
 
   // About Us
   const aboutTitle = document.createElement("div");
