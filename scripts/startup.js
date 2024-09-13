@@ -3,10 +3,10 @@ window.GUI_Imports = new (function() {
   this.EventEmitter = class EventEmitter {
     _eventHandlers = {};
     isValidType(type) {
-      return typeof type === "string";
+      return typeof type === 'string';
     }
     isValidHandler(handler) {
-      return typeof handler === "function";
+      return typeof handler === 'function';
     }
     on(type, handler) {
       if (!type || !handler) return false;
@@ -151,7 +151,7 @@ window.GUI = new (function() {
       const script = document.createElement('script');
       script.id = 'page-loader';
       script.src = `./scripts/${name}-page.js`;
-      this.scripts.push(script);
+      this.contentBody.scripts.push(script);
       document.body.appendChild(script);
       GUI.globalEvents.emit('tab-switch', name);
     };
