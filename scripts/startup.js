@@ -43,6 +43,16 @@ window.GUI_Imports = new (function() {
   };
 })();
 window.GUI = new (function() {
+  this.importScript = function(url) {
+    const node = document.createElement('script');
+    node.loadPromise = new Promise((resolve, reject) => {
+      node.onload = resolve;
+      node.onerror = reject;
+      node.src = url;
+      document.body.appendChild(node);
+    });
+    return node;
+  };
   this.globalEvents = new GUI_Imports.EventEmitter();
   this.csStorage = new (function() {
     const key = 'CS-Storage';
@@ -87,7 +97,7 @@ window.GUI = new (function() {
     this.tab.set(name);
   });
   
-  this.tab = new (function(GUI_Imports) {
+  this.tab = new (function(GUI, GUI_Imports) {
     this.current = GUI_Imports.URLParams.get('page') || 'home';
     this.contentBody = new (function() {
       this.scripts = [];
@@ -106,16 +116,16 @@ window.GUI = new (function() {
         while(script && (script = this.scripts.shift())) script.remove();
       };
     })();
-    this.reset = function() {
+    this.reset = function(body) {
       this.contentBody.remove();
       this.contentBody.removeScripts();
+      if (body) this.contentBody.set(body);
     };
     this.acquire = function() {
-      this.reset();
       const body = document.createElement('div');
       body.classList = 'content-body';
       document.body.appendChild(body);
-      this.contentBody.set(body);
+      this.reset(body);
       return body;
     };
     this.set = function(name) {
@@ -124,13 +134,11 @@ window.GUI = new (function() {
       this.current = name;
       const newUrl = `${window.location.pathname}?${GUI_Imports.URLParams.toString()}`;
       window.history.replaceState({}, '', newUrl);
-      const script = document.createElement('script');
+      const script = GUI.importScript(`./scripts/${name}-page.js`);
       script.id = 'page-loader';
-      script.src = `./scripts/${name}-page.js`;
       this.contentBody.scripts.push(script);
-      document.body.appendChild(script);
     };
-  })(GUI_Imports);
+  })(GUI, GUI_Imports);
   
   this.nav = new (function(GUI) {
     const { tab, globalEvents, csStorage } = GUI;
