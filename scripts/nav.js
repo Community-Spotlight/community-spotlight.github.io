@@ -26,6 +26,7 @@ window.GUI_Nav = new (function() {
     btn.dataset.name = String(name);
     btn.role = 'button';
     btn.setAttribute('aria-pressed', 'false');
+    btn.tabindex = String(this.tabindex);
     this.node.appendChild(btn);
     btn.innerHTML = `<img src="./assets/${asset}" /><span role="presentation"></span>`;
     btn.querySelector('span').textContent = text;
