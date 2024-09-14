@@ -1,11 +1,18 @@
 body {
+  --text-colour: black;
+  --bg-colour: white;
   margin: 0px;
-  color: white;
+  color: var(--text-colour);
+  background: var(--bg-colour);
   text-align: center;
   font-size: 18px;
   font-family: arial;
   overflow: scroll;
   overflow-x: auto;
+}
+body[data-dark="true"] {
+  --text-colour: true !important;
+  --bg-colour: black !important;
 }
 
 .nav-bar {
