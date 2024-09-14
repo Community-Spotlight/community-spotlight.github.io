@@ -23,7 +23,7 @@
         this.data = typeof update === 'string' ? JSON.parse(update) : update;
         localStorage.setItem(key, JSON.stringify(this.data));
         return;
-      }
+      } else localStorage.setItem(key, JSON.stringify(this.data));
       try {
         this.data = JSON.parse(localStorage.getItem(key));
       } catch {
@@ -32,11 +32,23 @@
       }
     };
     this.refresh(localStorage.getItem(key) || defaultConfig);
-    GUI_Imports.BasicCache.link(this);
+    GUI_Imports.BasicCache.link(this, (function(name) {
+      this.data.cache ??= {};
+      if (!name) return this.data.cache;
+      return this.data.cache[name];
+    }).bind(this));
+    this.data.cache ??= {};
+    this.data.dark ??= true;
   })(GUI_Imports);
   await (this.importScript('./scripts/nav.js').loadPromise);
   if (this.csStorage.data.dark) document.body.dataset.dark = 'true';
   else delete document.body.dataset.dark;
+
+  WindowEvents.on('setCacheProp', (cached) => {
+    this.csStorage.data.cache ??= {};
+    this.csStorage.data.cache[cached.name] = cached;
+  });
+  WindowEvents.on('refreshCsStorage', (obj) => this.csStorage.refresh(obj || undefined));
   
   this.globalEvents.on('theme-switch', (val, btn, children) => {
     btn.dataset.dark = val;
@@ -79,21 +91,12 @@
       fn(body);
       return body;
     };
-    function safeName(str) {
-      for (const r of Array.from(/(\d|\w|\s)*/giy.exec(str))) {
-        str = str.replace(r, '');
-      }
-      if (str[0] !== undefined) return false;
-      return true;
-    }
     this.set = function(name) {
-      name = decodeURIComponent(name);
       this.reset();
       GUI_Imports.URLParams.set('page', name);
       this.current = name;
       const newUrl = `${window.location.pathname}?${GUI_Imports.URLParams.toString()}`;
       window.history.replaceState({}, '', newUrl);
-      if (!safeName(name)) throw new Error('Nice try bud');
       const script = GUI.importScript(`./scripts/${name}-page.js`);
       script.loadPromise.catch((err) => {
         alert(`Failed to load page "${name}", does it exist?`);
