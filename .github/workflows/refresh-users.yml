@@ -1,0 +1,34 @@
+name: Refresh members
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '35 09 * * 00'
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+jobs:
+  ci:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and write members
+        run: |
+          rm -rf 'meta/users.json'
+          printf "{\"buildtime\":\"$(date)\",\"users\":" > 'meta/users.json'
+          printf "$(tr -d "\n" <<< "$(tr -d " " <<< "$(curl -L -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/orgs/Community-Spotlight/members)")")" >> 'meta/users.json'
+          printf '}' >> 'meta/users.json'
+          echo | cat 'meta/users.json'
+      - name: Commit and push
+        run: |
+          git config --global user.name "Community Spotlight"
+          git config --global user.email "community-spotlight@noreply.com"
+          git add 'meta/users.json'
+          git commit -m "Refresh contributers"
+          git push -f
