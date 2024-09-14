@@ -107,7 +107,23 @@
     this.node = document.querySelector('nav.nav-bar');
     this.logo = document.querySelector('nav.nav-bar div.logo');
     this.theme = document.querySelector('div[data-name="theme-switch"]');
-    this.home = document.querySelector(`div.nav-btn[data-name="home"]`)
+    this.home = document.querySelector(`div.nav-btn[data-name="home"]`);
+    function implementButtonEvents(btn, altcallback, tab) {
+      btn.altpress = altcallback || (() => {});
+      btn.dataset.tab = String(tab ?? true);
+      btn.onmousedown = function(...args) {
+        this.setAttribute('aria-pressed', 'true');
+        this.altpress.apply(this, args);
+      };
+      btn.onclick = function(...args) {
+        if (this.dataset.tab == 'true') globalEvents.emit('tab-switch', this.dataset.name);
+        this.altpress.apply(this, args);
+      };
+      btn.onmouseup = function(...args) {
+        this.setAttribute('aria-pressed', 'false');
+        this.altpress.apply(this, args);
+      };
+    };
     this.attachListeners = function() {
       this.logo.onclick = () => {
         if (this.home) {
@@ -117,20 +133,14 @@
         globalEvents.emit('tab-switch', 'home');
       };
       this.theme.dataset.dark = String(csStorage.data.dark);
-      this.theme.onmousedown = () => this.theme.setAttribute('aria-pressed', 'true');
-      this.theme.onclick = () => {
-        const val = !(this.theme.dataset.dark == 'true');
+      implementButtonEvents(this.theme, function() {
+        const val = !(this.dataset.dark == 'true');
         csStorage.data.dark = val;
-        globalEvents.emit('theme-switch', val, this.theme, this.theme.children);
+        globalEvents.emit('theme-switch', val, this, this.children);
         csStorage.refresh(csStorage.data);
-      };
-      this.theme.onmouseup = () => this.theme.setAttribute('aria-pressed', 'false');
+      }, false);
       if (!csStorage.data.dark) globalEvents.emit('theme-switch', csStorage.data.dark, this.theme, this.theme.children);
-      for (const btn of this.buttons) {
-        btn.onmousedown = function() { this.setAttribute('aria-pressed', 'true'); };
-        btn.onclick = function() { globalEvents.emit('tab-switch', this.dataset.name); };
-        btn.onmouseup = function() { this.setAttribute('aria-pressed', 'false'); };
-      }
+      for (const btn of this.buttons) implementButtonEvents(btn, () => {}, true);
     };
     this.spawn = function(name, copyableBtn) {
       switch(name) {
@@ -145,12 +155,7 @@
           this.home.setAttribute('aria-pressed', 'true');
           this.home.tabindex = String(copyableBtn.tabindex);
           this.home.focus();
-          this.home.onmousedown = function() { this.setAttribute('aria-pressed', 'true'); };
-          this.home.onclick = () => {
-            globalEvents.emit('tab-switch', 'home');
-            this.home.remove();
-          };
-          this.home.onmouseup = function() { this.setAttribute('aria-pressed', 'false'); };
+          implementButtonEvents(this.home, () => this.home.remove(), true);
           this.node.insertBefore(this.home, copyableBtn);
         };
       }
