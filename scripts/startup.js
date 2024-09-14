@@ -115,6 +115,14 @@
         this.setAttribute('aria-pressed', 'true');
         this.altpress.apply(this, args);
       };
+      btn.onkeydown = function(...args) {
+        const [ev] = args;
+        if (ev.keyCode === 32 || ev.keyCode === 13) {
+          ev.preventDefault();
+          this.setAttribute('aria-pressed', 'true');
+          this.altpress.apply(this, args);
+        }
+      };
       btn.onclick = function(...args) {
         if (this.dataset.tab == 'true') globalEvents.emit('tab-switch', this.dataset.name);
         this.altpress.apply(this, args);
@@ -122,6 +130,14 @@
       btn.onmouseup = function(...args) {
         this.setAttribute('aria-pressed', 'false');
         this.altpress.apply(this, args);
+      };
+      btn.onkeyup = function(...args) {
+        const [ev] = args;
+        if (ev.keyCode === 32 || ev.keyCode === 13) {
+          ev.preventDefault();
+          this.setAttribute('aria-pressed', 'false');
+          this.altpress.apply(this, args);
+        }
       };
     };
     this.attachListeners = function() {
