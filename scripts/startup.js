@@ -128,7 +128,7 @@
       this.logo.onclick = () => globalEvents.emit('tab-switch', 'home');
       this.theme.dataset.dark = String(csStorage.data.dark);
       implementButtonEvents(this.theme, function(upEvent) {
-        if (upEvent) return;
+        if (!upEvent) return;
         const val = !(this.dataset.dark == 'true');
         csStorage.data.dark = val;
         globalEvents.emit('theme-switch', val, this, this.children);
