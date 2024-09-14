@@ -33,15 +33,15 @@
     };
     this.refresh(localStorage.getItem(key) || defaultConfig);
   })();
-  if (document.body.dataset.dark && !this.csStorage.data.dark) delete document.body.dataset.dark;
-  else document.body.dataset.dark = 'true';
+  if (this.csStorage.data.dark) document.body.dataset.dark = 'true';
+  else delete document.body.dataset.dark;
   
   this.globalEvents.on('theme-switch', (val, btn, children) => {
     btn.dataset.dark = val;
     children[0].src = val ? './assets/light.svg' : './assets/dark.svg';
     children[1].textContent = val ? 'Light Mode' : 'Dark Mode';
-    if (document.body.dataset.dark && !val) delete document.body.dataset.dark;
-    else document.body.dataset.dark = 'true';
+    if (val) document.body.dataset.dark = 'true';
+    else delete document.body.dataset.dark;
   });
   this.globalEvents.on('tab-switch', (name) => this.tab.set(name));
   
