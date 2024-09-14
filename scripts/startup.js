@@ -163,7 +163,6 @@
           if (this.home) this.home.remove();
           this.home = copyableBtn.cloneNode(true);
           this.home.dataset.name = 'home';
-          this.home.dataset.tab = 'false';
           this.home.children[0].src = './assets/home.svg';
           this.home.children[1].textContent = 'Back to Home';
           this.home.style.boxShadow = 'inset 0 -5px 0 0 #0391a3';
@@ -176,7 +175,7 @@
             if (upEvent) return;
             this.remove();
             this.nav.home = null;
-          }, true, true);
+          }, false, true);
           this.node.insertBefore(this.home, copyableBtn);
         };
       }
