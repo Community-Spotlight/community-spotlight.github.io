@@ -33,13 +33,15 @@
     };
     this.refresh(localStorage.getItem(key) || defaultConfig);
   })();
+  if (document.body.dataset.dark && !val) delete document.body.dataset.dark;
+  else document.body.dataset.dark = 'true';
   
   this.globalEvents.on('theme-switch', (val, btn, children) => {
     btn.dataset.dark = val;
-    children[0].src = val === false ? './assets/dark.svg' : './assets/light.svg';
-    children[1].textContent = val === false ? 'Dark Mode' : 'Light Mode';
-    document.body.style.background = val === false ? '#ffffff' : '#141414';
-    document.body.style.color = val === false ? '#000000' : '#ffffff';
+    children[0].src = val ? './assets/light.svg' : './assets/dark.svg';
+    children[1].textContent = val ? 'Light Mode' : 'Dark Mode';
+    if (document.body.dataset.dark && !val) delete document.body.dataset.dark;
+    else document.body.dataset.dark = 'true';
   });
   this.globalEvents.on('tab-switch', (name) => this.tab.set(name));
   
