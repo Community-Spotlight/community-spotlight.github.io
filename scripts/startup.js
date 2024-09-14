@@ -87,6 +87,7 @@
       return true;
     }
     this.set = function(name) {
+      name = decodeURIComponent(name);
       this.reset();
       GUI_Imports.URLParams.set('page', name);
       this.current = name;
