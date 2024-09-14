@@ -1,4 +1,5 @@
 (async function() {
+  window.GUI = this;
   this.importScript = function(url) {
     const node = document.createElement('script');
     node.loadPromise = new Promise((resolve, reject) => {
@@ -110,22 +111,19 @@
     this.home = document.querySelector(`div.nav-btn[data-name="home"]`);
     function implementButtonEvents(btn, altcallback, tab) {
       btn.altpress = altcallback || (() => {});
-      btn.dataset.tab = String(tab ?? true);
-      btn.onmousedown = function(...args) {
+      btn.altdown = function(...args) {
         this.setAttribute('aria-pressed', 'true');
+        if (this.dataset.tab == 'true') globalEvents.emit('tab-switch', this.dataset.name);
         this.altpress.apply(this, args);
       };
+      btn.dataset.tab = String(tab ?? true);
+      btn.onmousedown = btn.altdown;
       btn.onkeydown = function(...args) {
         const [ev] = args;
         if (ev.keyCode === 32 || ev.keyCode === 13) {
           ev.preventDefault();
-          this.setAttribute('aria-pressed', 'true');
-          this.altpress.apply(this, args);
+          btn.altdown(...args);
         }
-      };
-      btn.onclick = function(...args) {
-        if (this.dataset.tab == 'true') globalEvents.emit('tab-switch', this.dataset.name);
-        this.altpress.apply(this, args);
       };
       btn.onmouseup = function(...args) {
         this.setAttribute('aria-pressed', 'false');
