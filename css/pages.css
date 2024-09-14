@@ -5,6 +5,7 @@
   justify-content: center;
   text-align: center;
   overflow: auto;
+  scroll: auto;
 }
 .title-txt {
   font-weight: 800;
