@@ -79,12 +79,20 @@
       fn(body);
       return body;
     };
+    function safeName(str) {
+      for (const r of Array.from(/(\d|\w|\s)*/giy.exec(str))) {
+        str = str.replace(r, '');
+      }
+      if (str[0] !== undefined) return false;
+      return true;
+    }
     this.set = function(name) {
       this.reset();
       GUI_Imports.URLParams.set('page', name);
       this.current = name;
       const newUrl = `${window.location.pathname}?${GUI_Imports.URLParams.toString()}`;
       window.history.replaceState({}, '', newUrl);
+      if (!safeName(name)) throw new Error('Nice try bud');
       const script = GUI.importScript(`./scripts/${name}-page.js`);
       script.loadPromise.catch((err) => {
         alert(`Failed to load page "${name}", does it exist?`);
