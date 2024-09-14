@@ -115,7 +115,7 @@
         this.setAttribute('aria-pressed', 'true');
         if (this.dataset.evbefore == 'true') this.altpress.call(this, false, args);
         if (this.dataset.tab == 'true') globalEvents.emit('tab-switch', this.dataset.name);
-        if (this.dataset.evbefore === 'false') this.altpress.call(this, false, args);
+        if (this.dataset.evbefore == 'false') this.altpress.call(this, false, args);
       };
       btn.dataset.tab = String(tab ?? true);
       btn.dataset.evafter = String(doBefore ?? false);
@@ -170,10 +170,11 @@
           this.home.setAttribute('aria-pressed', 'true');
           this.home.setAttribute('tabindex', String(copyableBtn.getAttribute('tabindex')));
           this.home.focus();
-          implementButtonEvents(this.home, (upEvent) => {
+          this.home.nav = this;
+          implementButtonEvents(this.home, function(upEvent) {
             if (upEvent) return;
-            this.home.remove();
-            this.home = null;
+            this.remove();
+            this.nav.home = null;
           }, true, true);
           this.node.insertBefore(this.home, copyableBtn);
         };
