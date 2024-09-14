@@ -44,11 +44,13 @@
     for (const btn of this.nav.buttons) {
       if (btn.dataset.name !== name) {
         btn.style.display = '';
+        btn.setAttribute('aria-hidden', 'false');
         continue;
       }
       if (btn.dataset.name !== 'home') {
         this.nav.spawn('home', btn);
         btn.style.display = 'none';
+        btn.setAttribute('aria-hidden', 'true');
         btn.setAttribute('aria-pressed', 'false');
       }
     }
