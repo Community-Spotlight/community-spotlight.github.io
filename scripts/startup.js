@@ -153,7 +153,7 @@
           this.home.style.boxShadow = 'inset 0 -5px 0 0 #0391a3';
           this.home.role = 'button';
           this.home.setAttribute('aria-pressed', 'true');
-          this.home.tabindex = String(copyableBtn.tabindex);
+          this.home.setAttribute('tabindex', String(copyableBtn.getAttribute('tabindex')));
           this.home.focus();
           implementButtonEvents(this.home, () => this.home.remove(), true);
           this.node.insertBefore(this.home, copyableBtn);
