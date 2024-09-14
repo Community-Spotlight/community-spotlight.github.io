@@ -82,11 +82,14 @@
       this.contentBody.remove();
       this.contentBody.removeScripts();
     };
-    this.acquire = function(fn) {
+    this.acquire = function(fn, css) {
       fn = fn ?? (() => {});
+      css = css || '';
       const body = document.createElement('div');
       body.classList = 'content-body';
+      body.appendChild(document.createElement('style'));
       document.body.appendChild(body);
+      body.querySelector('style').textContent = css;
       this.contentBody.set(body);
       fn(body);
       return body;
