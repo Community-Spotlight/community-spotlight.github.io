@@ -1,7 +1,7 @@
 /*
   Community Spotlight About Page
 */
-(function() {
+GUI.tab.acquire(function(newBody) {
   const descriptionTxts = {
     abt: `
       Community Spotlight is a non-profit Project that is aimed towards providing free Promotional Content to Everyone.\n
@@ -19,9 +19,6 @@
       Or by Emailing us at:\n
     `
   };
-
-  // Main New Body
-  const newBody = GUI.tab.acquire();
 
   // About Us
   const aboutTitle = document.createElement("div");
@@ -43,4 +40,4 @@
 
   // Append to Content Body
   newBody.append(aboutTitle, aboutTxt, GUI.makeBreak(), contactTitle, contactTxt);
-})();
+});
