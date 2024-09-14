@@ -11,15 +11,15 @@ window.GUI_Nav = new (function() {
     });
   };
   this.node = document.querySelector('[for="nav"]');
-  this.node.innerHTML = `<div class="logo" data-name="logo" role="button" aria-pressed="false" tabindex="1">
+  this.node.innerHTML = `<div class="logo" data-name="logo" role="button" aria-pressed="false" tabindex="0">
     <img src="./assets/CS-logo.svg"></img>
     <div style="padding: 0px 5px; margin-right: 5px;">Community Spotlight</div>
   </div>
-  <div class="nav-btn" data-name="theme-switch" role="button" aria-pressed="false" tabindex="2">
+  <div class="nav-btn" data-name="theme-switch" role="button" aria-pressed="false" tabindex="1">
     <img src="./assets/light.svg"></img>
     <span>Light Mode</span>
   </div>`;
-  this.tabindex = 3;
+  this.tabindex = 2;
   this.createButton = function(name, asset, text) {
     const btn = document.createElement('div');
     btn.classList = 'nav-btn';
