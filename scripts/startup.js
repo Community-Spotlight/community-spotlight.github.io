@@ -142,11 +142,13 @@
           this.home.style.boxShadow = 'inset 0 -5px 0 0 #0391a3';
           this.home.role = 'button';
           this.home.setAttribute('aria-pressed', 'true');
-          this.node.insertBefore(this.home, copyableBtn);
+          this.home.tabindex = String(copyableBtn.tabindex);
+          this.home.focus();
           this.home.onclick = () => {
             globalEvents.emit('tab-switch', 'home');
             this.home.remove();
           };
+          this.node.insertBefore(this.home, copyableBtn);
         };
       }
     };
