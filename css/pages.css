@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  overflow: auto;
 }
 .title-txt {
   font-weight: 800;
