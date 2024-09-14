@@ -86,6 +86,9 @@
       const newUrl = `${window.location.pathname}?${GUI_Imports.URLParams.toString()}`;
       window.history.replaceState({}, '', newUrl);
       const script = GUI.importScript(`./scripts/${name}-page.js`);
+      script.loadPromise.catch((err) => {
+        alert(`Failed to load page "${name}", does it exist?`);
+      });
       script.id = 'page-loader';
       this.contentBody.scripts.push(script);
     };
