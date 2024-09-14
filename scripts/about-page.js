@@ -1,7 +1,4 @@
-/*
-  Community Spotlight About Page
-*/
-GUI.tab.acquire(function(newBody) {
+GUI.tab.acquire((contentBody) => {
   const descriptionTxts = {
     abt: `
       Community Spotlight is a non-profit Project that is aimed towards providing free Promotional Content to Everyone.\n
@@ -39,5 +36,5 @@ GUI.tab.acquire(function(newBody) {
   contactTxt.innerHTML = descriptionTxts.contact.trim();
 
   // Append to Content Body
-  newBody.append(aboutTitle, aboutTxt, GUI.makeBreak(), contactTitle, contactTxt);
+  contentBody.append(aboutTitle, aboutTxt, GUI.makeBreak(), contactTitle, contactTxt);
 });
