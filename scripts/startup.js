@@ -134,7 +134,6 @@
       switch(name) {
         case 'home': {
           if (this.home) this.home.remove();
-          this.home = null;
           this.home = copyableBtn.cloneNode(true);
           this.home.dataset.name = 'home';
           this.home.children[0].src = './assets/home.svg';
@@ -144,10 +143,12 @@
           this.home.setAttribute('aria-pressed', 'true');
           this.home.tabindex = String(copyableBtn.tabindex);
           this.home.focus();
+          this.home.onmousedown = function() { this.setAttribute('aria-pressed', 'true'); };
           this.home.onclick = () => {
             globalEvents.emit('tab-switch', 'home');
             this.home.remove();
           };
+          this.home.onmouseup = function() { this.setAttribute('aria-pressed', 'false'); };
           this.node.insertBefore(this.home, copyableBtn);
         };
       }
