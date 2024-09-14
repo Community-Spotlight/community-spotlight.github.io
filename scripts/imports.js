@@ -41,5 +41,40 @@ window.GUI_Imports = new (function() {
       for (const event in events) events[event] = [];
     }
   };
+  this.BasicCache = new (function() {
+    let csStorage = null, cache = Object.create(null);
+    this.link = function(csStorageInstance) {
+      csStorage ??= csStorageInstance;
+      if (!csStorage) return;
+      csStorage.cache ??= Object.create(null);
+      Object.values(csStorage.cache).forEach(cached => {
+        cache[cashed.name] = structuredClone(cached);
+        cache[cashed.name].fn = () => Promise.reject('Cache function not implemented');
+      });
+    };
+    this.cache = async function(name, ms, cacheFn) {
+      if (!csStorage || cache[name]) {
+        if (!csStorage) return;
+        if ((Date.now() - cache[name].start) < cache[name].ms) return;
+      };
+      cache[name] = {
+        start: Date.now(),
+        ms, name, value: '',
+      };
+      const cache = cache[name];
+      csStorage.cache[name] = structuredClone(cache);
+      cache.fn = async () => {
+        cache.value = await cacheFn.call(window, cache);
+        csStorage.cache[name] = cache.value;
+        csStorage.refresh();
+      };
+      await cache.fn();
+    };
+    this.get = async function(name) {
+      if (!csStorage || !cache[name]) return;
+      if ((Date.now() - cache[name].start) < cache[name].ms) await this.cache(name, cache[name].ms, cache[name].fn);
+      return cache[name].value;
+    };
+  })();
 })();
 window.WindowEvents = new GUI_Imports.EventEmitter();
