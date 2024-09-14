@@ -33,7 +33,7 @@
     };
     this.refresh(localStorage.getItem(key) || defaultConfig);
   })();
-  if (document.body.dataset.dark && !val) delete document.body.dataset.dark;
+  if (document.body.dataset.dark && !csStorage.data.dark) delete document.body.dataset.dark;
   else document.body.dataset.dark = 'true';
   
   this.globalEvents.on('theme-switch', (val, btn, children) => {
