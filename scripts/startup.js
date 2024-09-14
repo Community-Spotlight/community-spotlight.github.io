@@ -70,11 +70,13 @@
       this.contentBody.remove();
       this.contentBody.removeScripts();
     };
-    this.acquire = function() {
+    this.acquire = function(fn) {
+      fn = fn ?? (() => {});
       const body = document.createElement('div');
       body.classList = 'content-body';
       document.body.appendChild(body);
       this.contentBody.set(body);
+      fn(body);
       return body;
     };
     this.set = function(name) {
