@@ -11,7 +11,7 @@ body {
   overflow-x: auto;
 }
 body[data-dark="true"] {
-  --text-colour: true !important;
+  --text-colour: white !important;
   --bg-colour: black !important;
 }
 
