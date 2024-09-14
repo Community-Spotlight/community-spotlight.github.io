@@ -109,14 +109,16 @@
     this.logo = document.querySelector('nav.nav-bar div.logo');
     this.theme = document.querySelector('div[data-name="theme-switch"]');
     this.home = document.querySelector(`div.nav-btn[data-name="home"]`);
-    function implementButtonEvents(btn, altcallback, tab) {
+    function implementButtonEvents(btn, altcallback, tab, doBefore) {
       btn.altpress = altcallback || (() => {});
       btn.altdown = function(...args) {
         this.setAttribute('aria-pressed', 'true');
+        if (this.dataset.evbefore == 'true') this.altpress.call(this, false, args);
         if (this.dataset.tab == 'true') globalEvents.emit('tab-switch', this.dataset.name);
-        this.altpress.apply(this, args);
+        if (this.dataset.evbefore === 'false') this.altpress.call(this, false, args);
       };
       btn.dataset.tab = String(tab ?? true);
+      btn.dataset.evafter = String(doBefore ?? false);
       btn.onmousedown = btn.altdown;
       btn.onkeydown = function(...args) {
         const [ev] = args;
@@ -127,34 +129,33 @@
       };
       btn.onmouseup = function(...args) {
         this.setAttribute('aria-pressed', 'false');
-        this.altpress.apply(this, args);
+        this.altpress.call(this, true, ...args);
       };
       btn.onkeyup = function(...args) {
         const [ev] = args;
         if (ev.keyCode === 32 || ev.keyCode === 13) {
           ev.preventDefault();
           this.setAttribute('aria-pressed', 'false');
-          this.altpress.apply(this, args);
+          this.altpress.call(this, true, args);
         }
       };
     };
     this.attachListeners = function() {
       this.logo.onclick = () => {
-        if (this.home) {
-          this.home.remove();
-          this.home = null;
-        };
+        if (this.home) this.home.remove();
+        this.home = null;
         globalEvents.emit('tab-switch', 'home');
       };
       this.theme.dataset.dark = String(csStorage.data.dark);
-      implementButtonEvents(this.theme, function() {
+      implementButtonEvents(this.theme, function(upEvent) {
+        if (upEvent) return;
         const val = !(this.dataset.dark == 'true');
         csStorage.data.dark = val;
         globalEvents.emit('theme-switch', val, this, this.children);
         csStorage.refresh(csStorage.data);
-      }, false);
+      }, false, false);
       if (!csStorage.data.dark) globalEvents.emit('theme-switch', csStorage.data.dark, this.theme, this.theme.children);
-      for (const btn of this.buttons) implementButtonEvents(btn, () => {}, true);
+      for (const btn of this.buttons) implementButtonEvents(btn, () => {}, true, false);
     };
     this.spawn = function(name, copyableBtn) {
       switch(name) {
@@ -169,7 +170,11 @@
           this.home.setAttribute('aria-pressed', 'true');
           this.home.setAttribute('tabindex', String(copyableBtn.getAttribute('tabindex')));
           this.home.focus();
-          implementButtonEvents(this.home, () => this.home.remove(), true);
+          implementButtonEvents(this.home, (upEvent) => {
+            if (upEvent) return;
+            this.home.remove();
+            this.home = null;
+          }, true, true);
           this.node.insertBefore(this.home, copyableBtn);
         };
       }
