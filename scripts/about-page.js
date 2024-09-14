@@ -43,5 +43,4 @@
 
   // Append to Content Body
   newBody.append(aboutTitle, aboutTxt, GUI.makeBreak(), contactTitle, contactTxt);
-  document.body.appendChild(newBody);
 })();
