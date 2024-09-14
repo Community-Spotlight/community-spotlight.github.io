@@ -42,36 +42,38 @@ window.GUI_Imports = new (function() {
     }
   };
   this.BasicCache = new (function() {
-    let csStorage = null, cache = Object.create(null);
-    this.link = function(csStorageInstance) {
-      csStorage ??= csStorageInstance;
-      if (!csStorage) return;
-      csStorage.cache ??= Object.create(null);
-      Object.values(csStorage.cache).forEach(cached => {
-        cache[cashed.name] = structuredClone(cached);
-        cache[cashed.name].fn = () => Promise.reject('Cache function not implemented');
+    let read = null, cache = Object.create(null);
+    this.storage = cache;
+    this.link = function(csStorageInstance, readCache) {
+      if (!csStorageInstance || !readCache) return;
+      read = readCache;
+      Object.values(readCache()).forEach(cached => {
+        WindowEvents.emit('setCacheProp', cached);
+        cache[cached.name] = structuredClone(cached);
+        cache[cached.name].fn = () => Promise.reject('Cache function not implemented');
       });
+      WindowEvents.emit('refreshCsStorage');
     };
     this.cache = async function(name, ms, cacheFn) {
-      if (!csStorage || cache[name]) {
-        if (!csStorage) return;
+      if (!read || cache[name]) {
+        if (!read) return;
         if ((Date.now() - cache[name].start) < cache[name].ms) return;
       };
       cache[name] = {
         start: Date.now(),
         ms, name, value: '',
       };
-      const cache = cache[name];
-      csStorage.cache[name] = structuredClone(cache);
-      cache.fn = async () => {
-        cache.value = await cacheFn.call(window, cache);
-        csStorage.cache[name] = cache.value;
-        csStorage.refresh();
+      const cacheObj = cache[name], altCacheObj = structuredClone(cacheObj);
+      cacheObj.fn = async () => {
+        cacheObj.value = await cacheFn.call(window, this);
+        altCacheObj.value = cacheObj.value;
+        WindowEvents.emit('setCacheProp', altCacheObj);
+        WindowEvents.emit('refreshCsStorage');
       };
-      await cache.fn();
+      await cacheObj.fn();
     };
     this.get = async function(name) {
-      if (!csStorage || !cache[name]) return;
+      if (!read || !cache[name]) return;
       if ((Date.now() - cache[name].start) < cache[name].ms) await this.cache(name, cache[name].ms, cache[name].fn);
       return cache[name].value;
     };
