@@ -60,20 +60,19 @@
         this.node = null;
       };
       this.removeScripts = function() {
-        let script;
+        let script = true;
         while(script && (script = this.scripts.shift())) script.remove();
       };
     })();
     this.reset = function(body) {
       this.contentBody.remove();
       this.contentBody.removeScripts();
-      if (body) this.contentBody.set(body);
     };
     this.acquire = function() {
       const body = document.createElement('div');
       body.classList = 'content-body';
       document.body.appendChild(body);
-      this.reset(body);
+      this.contentBody.set(body);
       return body;
     };
     this.set = function(name) {
