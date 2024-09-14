@@ -10,12 +10,12 @@
     });
     return node;
   };
-  await (this.importScript('./scripts/nav.js').loadPromise);
   this.globalEvents = new GUI_Imports.EventEmitter();
-  this.csStorage = new (function() {
+  this.csStorage = new (function(GUI_Imports) {
     const key = 'CS-Storage';
     const defaultConfig = {
       dark: true,
+      cache: {},
     };
     this.data = null;
     this.refresh = function(update) {
@@ -32,7 +32,9 @@
       }
     };
     this.refresh(localStorage.getItem(key) || defaultConfig);
-  })();
+    GUI_Imports.BasicCache.link(this);
+  })(GUI_Imports);
+  await (this.importScript('./scripts/nav.js').loadPromise);
   if (this.csStorage.data.dark) document.body.dataset.dark = 'true';
   else delete document.body.dataset.dark;
   
