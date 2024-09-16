@@ -1,4 +1,4 @@
-import { html, Component, render } from './scripts/htm.mjs';
+import { html, Component, render } from './htm.mjs';
 export default (new (function() {
   this.html = html;
   this.htmlRender = render;
