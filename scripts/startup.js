@@ -1,4 +1,4 @@
-(async function() {
+window.OnImports = (async function(GUI_Imports) {
   window.GUI = this;
   this.importScript = function(url) {
     const node = document.createElement('script');
@@ -166,4 +166,4 @@
 
   this.makeBreak = () => document.createElement('br');
   WindowEvents.emit('GUI', this);
-}).apply({});
+}).bind({});
