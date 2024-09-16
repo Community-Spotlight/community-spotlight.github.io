@@ -1,4 +1,6 @@
 window.GUI_Imports = new (function() {
+  import * as htmJS from './scripts/htm.mjs';
+  this.htm = htmJS;
   const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   this.hasOwn = hasOwn;
   this.URLParams = new URLSearchParams(window.location.search);
