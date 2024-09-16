@@ -1,4 +1,4 @@
-import GUI_Imports from './scripts/imports.mjs';
+import GUI_Imports from './imports.mjs';
 window.WindowEvents = new GUI_Imports.EventEmitter();
 (async function() {
   window.GUI = this;
