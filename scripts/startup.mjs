@@ -1,4 +1,6 @@
-window.OnImports = (async function(GUI_Imports) {
+import GUI_Imports from './scripts/imports.mjs';
+window.WindowEvents = new GUI_Imports.EventEmitter();
+(async function() {
   window.GUI = this;
   this.importScript = function(url) {
     const node = document.createElement('script');
@@ -166,4 +168,4 @@ window.OnImports = (async function(GUI_Imports) {
 
   this.makeBreak = () => document.createElement('br');
   WindowEvents.emit('GUI', this);
-}).bind({});
+}).apply({});
