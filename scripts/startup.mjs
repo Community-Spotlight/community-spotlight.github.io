@@ -2,6 +2,7 @@ import GUI_Imports from './imports.mjs';
 window.WindowEvents = new GUI_Imports.EventEmitter();
 (async function() {
   window.GUI = this;
+  this.imports = GUI_Imports;
   this.importScript = function(url) {
     const node = document.createElement('script');
     node.loadPromise = new Promise((resolve, reject) => {
