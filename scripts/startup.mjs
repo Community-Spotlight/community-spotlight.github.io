@@ -8,6 +8,7 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
     node.loadPromise = new Promise((resolve, reject) => {
       node.onload = resolve;
       node.onerror = reject;
+      node.GUI = window.GUI;
       node.src = url;
       document.body.appendChild(node);
     });
