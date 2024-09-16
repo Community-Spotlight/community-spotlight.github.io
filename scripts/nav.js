@@ -1,15 +1,6 @@
-window.GUI_Nav = new (function() {
+window.GUI_Nav = new (async function() {
+  const GUI_Imports = document.currentScript.GUI.imports;
   this.globalEvents = new GUI_Imports.EventEmitter();
-  let _GUI = null;
-  this.GUI = function() {
-    if (_GUI) return Promise.resolve(_GUI);
-    return new Promise(resolve => {
-      WindowEvents.once('GUI', (GUI) => {
-        _GUI ??= GUI;
-        resolve(GUI);
-      });
-    });
-  };
   this.node = document.querySelector('[for="nav"]');
   this.node.innerHTML = `<div class="logo" data-name="logo" role="button" aria-pressed="false" tabindex="0" data-tab="false">
     <img src="./assets/CS-logo.svg"></img>
