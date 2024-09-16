@@ -1,5 +1,5 @@
-window.GUI_Imports = new (function() {
-  import { html, Component, render } from './scripts/htm.mjs';
+import { html, Component, render } from './scripts/htm.mjs';
+export default (new (function() {
   this.html = html;
   this.htmlRender = render;
   const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
@@ -81,6 +81,4 @@ window.GUI_Imports = new (function() {
       return cache[name].value;
     };
   })();
-})();
-window.WindowEvents = new GUI_Imports.EventEmitter();
-(window.OnImports || (() => {}))(GUI_Imports);
+})());
