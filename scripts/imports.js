@@ -82,3 +82,4 @@ window.GUI_Imports = new (function() {
   })();
 })();
 window.WindowEvents = new GUI_Imports.EventEmitter();
+(window.OnImports || (() => {}))(GUI_Imports);
