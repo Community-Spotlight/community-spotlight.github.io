@@ -1,7 +1,4 @@
-import { html, Component, render } from './htm.mjs';
 export default (new (function() {
-  this.html = html;
-  this.htmlRender = render;
   const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
   this.hasOwn = hasOwn;
   this.URLParams = new URLSearchParams(window.location.search);
