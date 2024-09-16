@@ -1,4 +1,4 @@
-window.GUI_Nav = new (async function() {
+window.GUI_Nav = new (function() {
   const GUI_Imports = document.currentScript.GUI.imports;
   this.globalEvents = new GUI_Imports.EventEmitter();
   this.node = document.querySelector('[for="nav"]');
