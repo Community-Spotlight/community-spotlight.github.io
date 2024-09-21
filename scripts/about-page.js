@@ -42,7 +42,7 @@ GUI.tab.acquire((contentBody) => {
  let about2 = document.createElement("div")
  about2.classList = "about-card"
  about2.id = "about-card2"
- about2.innerHTML = "<img src='assets/Screenshot 2024-09-21 104353.png'>";
+ about2.innerHTML = "<img src='assets/submission-example.png'>";
  about2.innerHTML += `<div> ${ descriptionTxts.abt[1] } </div>`;
 
  //About us 3
@@ -50,7 +50,7 @@ GUI.tab.acquire((contentBody) => {
  about3.classList = "about-card"
  about3.id = "about-card3"
  about3.innerHTML = `<div> ${ descriptionTxts.abt[2] } </div>`;
- about3.innerHTML += "<img src='assets/download (1).png'>";
+ about3.innerHTML += "<img src='assets/demo.png'>";
  about3.innerHTML += `<div> ${ descriptionTxts.abt[3] } </div>`;
 
  //Contact us
