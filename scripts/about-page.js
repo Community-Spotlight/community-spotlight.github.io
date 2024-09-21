@@ -1,7 +1,7 @@
 GUI.tab.acquire((contentBody) => {
   const descriptionTxts = {
     abt: [
-      `Community Spotlight is a <strong>non-profit</strong> Project that is aimed towards providing free Promotional Content to Everyone.\n`,
+      `<img src="assets/CS-logo.png" width=100px height=100px style="display: block;margin:auto;"></img> <br> Community Spotlight is a <strong>non-profit</strong> Project that is aimed towards providing free Promotional Content to Everyone.\n`,
 
       `For Advertisers, Community Spotlight allows you to Promote your content for Free in the form of Imagery, Video, or HTML.
       You have the ability to Promote any work of yours, including games, songs, websites, and more!\n`,
