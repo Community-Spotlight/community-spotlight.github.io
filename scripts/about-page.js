@@ -5,7 +5,7 @@ GUI.tab.acquire((contentBody) => {
       `For Advertisers, Community Spotlight allows you to Promote your content for Free in the form of Imagery, Video, or HTML.
       You have the ability to Promote any work of yours, including games, songs, websites, and more!\n`,
       `For Developers, Community Spotlight allows you to Display Promotions for Free with no sign-up required!`,
-      `Unfortunately, you will not be making any profit. You simply have the ability to fill empty space in your sites/games
+      `You will not be making any profit. You simply have the ability to fill empty space in your sites/games
       while helping others!`,
     ],
     contact: `
