@@ -1,15 +1,15 @@
 GUI.tab.acquire((contentBody) => {
   const descriptionTxts = {
     abt: [
-      `<img src="assets/CS-logo.png" width=100px height=100px style="display: block;margin:auto;"></img> <br> Community Spotlight is a <strong>non-profit</strong> Project that is aimed towards providing free Promotional Content to Everyone.\n`,
-      `For Advertisers, Community Spotlight allows you to Promote your content for Free in the form of Imagery, Video, or HTML.
+      `<img src="assets/CS-logo.png" width=100px height=100px style="display: block;margin:auto;"></img> <br> Community Spotlight is a <strong>non-profit</strong> project that is aimed towards providing free promotional content to everyone.\n`,
+      `For Advertisers, Community Spotlight allows you to promote your content for free in the form of imagery, video, or HTML.
       You have the ability to Promote any work of yours, including games, songs, websites, and more!\n`,
-      `For Developers, Community Spotlight allows you to Display Promotions for Free with no sign-up required!`,
+      `For Developers, Community Spotlight allows you to display pomotions for free with no sign-up required!`,
       `You will not be making any profit. You simply have the ability to fill empty space in your sites/games
       while helping others!`,
     ],
     contact: `
-      Feel free to Contact the Community Spotlight Team through:
+      Feel free to contact the Community Spotlight Team through:
       <br />
       <!-- Bruh fath find a different way to do that -->
     `
