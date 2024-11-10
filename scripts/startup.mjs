@@ -3,10 +3,14 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
 (async function() {
   window.GUI = this;
   this.imports = GUI_Imports;
-  this.importScript = function(url) {
+  this.importScript = function(url, skipDeletion) {
+    skipDeletion = skipDeletion ?? false;
     const node = document.createElement('script');
     node.loadPromise = new Promise((resolve, reject) => {
-      node.onload = resolve;
+      node.onload = (...args) => {
+        if (!skipDeletion) node.remove();
+        resolve(...args);
+      };
       node.onerror = reject;
       node.GUI = window.GUI;
       node.src = url;
@@ -74,6 +78,7 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
       };
       this.remove = function() {
         if (!this.node) return;
+        this.removeScripts();
         this.node.remove();
         this.node = null;
       };
@@ -84,7 +89,6 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
     })();
     this.reset = function(body) {
       this.contentBody.remove();
-      this.contentBody.removeScripts();
     };
     this.acquire = function(fn, css) {
       fn = fn ?? (() => {});
@@ -109,7 +113,6 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
         alert(`Failed to load page "${name}", does it exist?`);
       });
       script.id = 'page-loader';
-      this.contentBody.scripts.push(script);
     };
   })(this, GUI_Imports);
   
