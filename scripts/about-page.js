@@ -2,36 +2,18 @@ GUI.tab.acquire((contentBody) => {
   const descriptionTxts = {
     abt: [
       `<img src="assets/CS-logo.png" width=100px height=100px style="display: block;margin:auto;"></img> <br> Community Spotlight is a <strong>non-profit</strong> Project that is aimed towards providing free Promotional Content to Everyone.\n`,
-
       `For Advertisers, Community Spotlight allows you to Promote your content for Free in the form of Imagery, Video, or HTML.
       You have the ability to Promote any work of yours, including games, songs, websites, and more!\n`,
-
       `For Developers, Community Spotlight allows you to Display Promotions for Free with no sign-up required!`,
-
       `Unfortunately, you will not be making any profit. You simply have the ability to fill empty space in your sites/games
       while helping others!`,
     ],
     contact: `
       Feel free to Contact the Community Spotlight Team through:
-      
-      <br><br><br>
-
-      <a href=https://discord.gg/DzwQf2tJyW class="social-btn social-btn-discord"><i class="fa-brands fa-discord"></i></a>
-      <a class="social-btn social-btn-gmail"><img src="assets/gmail.svg"></img></a>
+      <br />
+      <!-- Bruh fath find a different way to do that -->
     `
   };
-
-  let styles = document.createElement("link")
-  styles.href = "css/about-page.css"
-  styles.rel = "stylesheet"
-
-  const fontAwesome = document.createElement('script');
-  fontAwesome.src = 'https://kit.fontawesome.com/1849f4e0f8.js';
-  fontAwesome.crossOrigin = 'anonymous';
-
-  let social_media_buttons = document.createElement("link")
-  social_media_buttons.href = "css/social-media-buttons.css"
-  social_media_buttons.rel = "stylesheet"
 
  //About us 1
  let about1 = document.createElement("div")
@@ -59,5 +41,55 @@ GUI.tab.acquire((contentBody) => {
  contact.innerHTML = descriptionTxts.contact;
 
   // Append to Content Body
-  contentBody.append(styles, social_media_buttons, fontAwesome, about1, about2, about3, contact, GUI.makeBreak());
-});
+  contentBody.append(about1, about2, about3, contact, GUI.makeBreak());
+}, `
+.about-card {
+  background: var(--theme-gradient);
+  padding: 50px;
+  margin: 30px;
+  border-radius: 10px;
+  color: #fff;
+  text-align: left;
+}
+
+#about-card2 {
+  max-width: 111ch;
+  align-self: flex-start;
+  padding: 20px 0;
+}
+
+#about-card2 div {
+  padding: 80px 15px;
+}
+
+#about-card2 img {
+  float: left;
+  padding-right: 20px;
+  padding-left: 30px;
+  position: relative;
+  display: block;
+  height: 200px; 
+  width: auto;
+  border-radius: 15px;
+}
+
+#about-card3 {
+  max-width: 90ch;
+  align-self: flex-end;
+  padding: 20px 15px;
+}
+
+#about-card3 div {
+  padding: 30px 20px;
+}
+
+#about-card3 img {
+  padding-right: 20px;
+  padding-left: 20px;
+  position: relative;
+  display: block;
+  height: 200px; 
+  width: auto;
+  border-radius: 15px;
+}
+`);
