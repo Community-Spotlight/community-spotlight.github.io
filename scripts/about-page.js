@@ -10,8 +10,10 @@ GUI.tab.acquire((contentBody) => {
     ],
     contact: `
       Feel free to contact the Community Spotlight Team through:
-      <br />
-      <!-- Bruh fath find a different way to do that -->
+      <br /><br />
+
+      <a href="https://discord.gg/DzwQf2tJyW"><img src="assets/DiscordLogo.svg" width=50px height=50px style="display: block;margin:auto;"></img></a>
+      <!-- there's no way i can mess up now -->
     `
   };
 
