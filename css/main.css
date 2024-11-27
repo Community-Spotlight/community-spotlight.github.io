@@ -2,6 +2,8 @@ body {
   --text-colour: black;
   --bg-colour: white;
   --theme-gradient: linear-gradient(10deg, #00aad9 15%, #00d970 85%);
+  --theme-blue: #00aad9;
+  --theme-green: #00d970;
   margin: 0px;
   color: var(--text-colour);
   background: var(--bg-colour);
@@ -37,6 +39,7 @@ body[data-dark="true"] {
   object-fit: contain;
   user-select: none;
   color: white !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .logo {
