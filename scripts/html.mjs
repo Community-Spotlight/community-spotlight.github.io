@@ -28,4 +28,5 @@ const Preact = {
 };
 import htm from './htm.mjs';
 const html = htm.bind(h);
+export { Preact, htm, html };
 export default { Preact, htm, html };
