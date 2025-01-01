@@ -68,7 +68,7 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
   this.globalEvents.on('tab-switch', (name) => this.tab.set(name));
   
   this.tab = new (function(GUI, GUI_Imports) {
-    this.current = GUI_Imports.URLParams.get('page') || 'home';
+    this.current = GUI_Imports.URLParams.get('page') || '';
     this.contentBody = new (function() {
       this.scripts = [];
       this.node = document.querySelector('div.content-body') || null;
@@ -115,6 +115,7 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
       });
       script.id = 'page-loader';
     };
+    if (this.current === '') this.set('home');
   })(this, GUI_Imports);
   
   this.nav = new (function(GUI) {
