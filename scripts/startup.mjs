@@ -1,7 +1,7 @@
 import GUI_Imports from './imports.mjs';
-window.WindowEvents = new GUI_Imports.EventEmitter();
+globalThis.WindowEvents = new GUI_Imports.EventEmitter();
 (async function() {
-  window.GUI = this;
+  globalThis.GUI = this;
   this.imports = GUI_Imports;
   this.importScript = function(url, skipDeletion) {
     skipDeletion = skipDeletion ?? false;
@@ -12,7 +12,7 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
         resolve(...args);
       };
       node.onerror = reject;
-      node.GUI = window.GUI;
+      node.GUI = globalThis.GUI;
       node.src = url;
       document.body.appendChild(node);
     });
@@ -103,11 +103,12 @@ window.WindowEvents = new GUI_Imports.EventEmitter();
       return body;
     };
     this.set = function(name) {
+      if (this.current === name) return;
       this.reset();
       GUI_Imports.URLParams.set('page', name);
       this.current = name;
-      const newUrl = `${window.location.pathname}?${GUI_Imports.URLParams.toString()}`;
-      window.history.replaceState({}, '', newUrl);
+      const newUrl = `${globalThis.location.pathname}?${GUI_Imports.URLParams.toString()}`;
+      globalThis.history.replaceState({}, '', newUrl);
       const script = GUI.importScript(`./scripts/${name}-page.js`);
       script.loadPromise.catch((err) => {
         alert(`Failed to load page "${name}", does it exist?`);
