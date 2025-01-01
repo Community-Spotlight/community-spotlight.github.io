@@ -102,8 +102,8 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
       fn(body);
       return body;
     };
-    this.set = function(name) {
-      if (this.current === name) return;
+    this.set = function(name, force) {
+      if (this.current === name && !force) return;
       this.reset();
       GUI_Imports.URLParams.set('page', name);
       this.current = name;
@@ -115,7 +115,7 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
       });
       script.id = 'page-loader';
     };
-    if (this.current === '') this.set('home');
+    if (this.current !== '') this.set(this.current, true);
   })(this, GUI_Imports);
   
   this.nav = new (function(GUI) {
