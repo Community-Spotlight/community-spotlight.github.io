@@ -7,9 +7,6 @@ GUI.tab.acquire(async (contentBody) => {
   const users = await GUI.imports.BasicCache.get("users");
 
   console.log(users);
-  contentBody.appendChild(document.createTextNode('I am an example!'));
 }, `
-.content-body {
-  background-color: red;
-}
+
 `);
