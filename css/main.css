@@ -1,8 +1,7 @@
 body {
   --text-colour: black;
   --bg-colour: white;
-  --bg-dark: #1e1e1e;
-  --bg-light: #fff;
+  --bg-box: #fff;
   --theme-gradient: linear-gradient(10deg, #00aad9 15%, #00d970 85%);
   --theme-blue: #00aad9;
   --theme-green: #00d970;
@@ -22,6 +21,7 @@ body {
 body[data-dark="true"] {
   --text-colour: white !important;
   --bg-colour: black !important;
+  --bg-box: #1e1e1e !important;
 
   background-image: radial-gradient(#484848 2px, transparent 2px);
   background-size: 32px 32px;
