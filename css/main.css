@@ -7,13 +7,14 @@ body {
   --theme-green: #00d970;
   --body-colour: #f9f9f9;
   --radial-colour: #dddddd;
+  
   margin: 0px;
   color: var(--text-colour);
   background: var(--bg-colour);
   text-align: center;
   font-size: 18px;
   font-family: arial;
-  background-image: radial-gradient(var(--radial-background) 2px, transparent 2px);
+  background-image: radial-gradient(var(--radial-colour) 2px, transparent 2px);
   background-size: 32px 32px;
   background-color: var(--body-colour);
 }
