@@ -16,7 +16,7 @@ GUI.tab.acquire(async (contentBody) => {
     </div>
   `;
 
-  const constructItem = (user, isOwner) => {
+  const constructItem = (user, specialTag) => {
     const userDiv = document.createElement("div");
     userDiv.classList.add("user-div");
 
@@ -28,7 +28,7 @@ GUI.tab.acquire(async (contentBody) => {
     name.textContent = user.login;
 
     const text = document.createElement("b");
-    text.textContent = "(CEO)";
+    text.textContent = `(${specialTag})`;
 
     userDiv.append(avatar, name, isOwner ? text : "");
     userDiv.addEventListener("click", (e) => {
@@ -46,7 +46,8 @@ GUI.tab.acquire(async (contentBody) => {
   memberList.classList.add("member-list");
   const userList = users.users;
   userList.forEach((user) => {
-    if (user.login === "SharkPool-SP") memberList.insertBefore(constructItem(user, true), memberList.firstChild);
+    if (user.login === "SharkPool-SP") memberList.insertBefore(constructItem(user, "CEO"), memberList.firstChild);
+    else if (user.login === "yuri-kiss") memberList.insertBefore(constructItem(user, "CO-CEO"), memberList.children[1]);
     else memberList.appendChild(constructItem(user, false));
   });
 
@@ -107,6 +108,7 @@ GUI.tab.acquire(async (contentBody) => {
   border-radius: 10px;
 }
 .content-body .user-div div {
+  white-space:nowrap;
   background-color: var(--bg-box);
   margin-top: 5px;
   padding: 10px;
@@ -114,6 +116,7 @@ GUI.tab.acquire(async (contentBody) => {
   border-radius: 10px;
 }
 .content-body .user-div b {
+  white-space:nowrap;
   font-size: 0.8em;
   background-color: var(--bg-box);
   border: solid grey 2px;
