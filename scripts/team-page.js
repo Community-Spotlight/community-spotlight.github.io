@@ -30,7 +30,7 @@ GUI.tab.acquire(async (contentBody) => {
     const text = document.createElement("b");
     text.textContent = `(${specialTag})`;
 
-    userDiv.append(avatar, name, isOwner ? text : "");
+    userDiv.append(avatar, name, specialTag ? text : "");
     userDiv.addEventListener("click", (e) => {
       window.open(user["html_url"], "_blank");
       e.stopPropagation();
