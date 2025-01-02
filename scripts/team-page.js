@@ -101,6 +101,7 @@ GUI.tab.acquire(async (contentBody) => {
   text-shadow: #05f5a5 0px 0px 15px;
 }
 .content-body .user-div img {
+  background-color: var(--bg-box);
   width: 10vw;
   border: solid grey 2px;
   border-radius: 10px;
