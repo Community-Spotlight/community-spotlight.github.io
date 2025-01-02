@@ -1,31 +1,28 @@
 body {
   --text-colour: black;
   --bg-colour: white;
-  --bg-box: #fff;
+  --bg-box: #ffffff;
   --theme-gradient: linear-gradient(10deg, #00aad9 15%, #00d970 85%);
   --theme-blue: #00aad9;
   --theme-green: #00d970;
+  --body-colour: #f9f9f9;
+  --radial-colour: #dddddd;
   margin: 0px;
   color: var(--text-colour);
   background: var(--bg-colour);
   text-align: center;
   font-size: 18px;
   font-family: arial;
-  overflow: scroll;
-  overflow-x: auto;
-
-  background-image: radial-gradient(#dddddd 2px, transparent 2px);
+  background-image: radial-gradient(var(--radial-background) 2px, transparent 2px);
   background-size: 32px 32px;
-  background-color: #f9f9f9;
+  background-color: var(--body-colour);
 }
 body[data-dark="true"] {
   --text-colour: white !important;
   --bg-colour: black !important;
   --bg-box: #1e1e1e !important;
-
-  background-image: radial-gradient(#484848 2px, transparent 2px);
-  background-size: 32px 32px;
-  background-color: #1e1e1e;
+  --body-colour: #1e1e1e !important;
+  --radial-colour: #484848 !important;
 }
 
 .nav-bar {
