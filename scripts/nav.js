@@ -18,8 +18,9 @@ window.GUI_Nav = new (function() {
     btn.role = 'button';
     btn.setAttribute('aria-pressed', 'false');
     btn.setAttribute('tabindex', String(this.tabindex));
+    btn.setAttribute('draggable', 'false');
     this.node.appendChild(btn);
-    btn.innerHTML = `<img src="./assets/${asset}" /><span role="presentation"></span>`;
+    btn.innerHTML = `<img src="./assets/${asset}" draggable="false" /><span role="presentation"></span>`;
     btn.querySelector('span').textContent = text;
     this.tabindex++;
   };
