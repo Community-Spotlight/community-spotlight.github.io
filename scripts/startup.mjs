@@ -71,9 +71,9 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
     this.current = GUI_Imports.URLParams.get('page') || '';
     this.contentBody = new (function() {
       this.scripts = [];
-      this.node = document.querySelector('div.content-body') || null;
+      this.node = document.querySelector('div.content-case') || null;
       this.set = function(node) {
-        if (!node) return this.node = document.querySelector('div.content-body');
+        if (!node) return this.node = document.querySelector('div.content-case');
         this.node = node;
       };
       this.remove = function() {
@@ -93,12 +93,17 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
     this.acquire = function(fn, css) {
       fn = fn ?? (() => {});
       css = css || '';
+      const bodyCase = document.createElement('div');
+      bodyCase.classList = 'content-case';
+
       const body = document.createElement('div');
       body.classList = 'content-body';
       body.appendChild(document.createElement('style'));
-      document.body.appendChild(body);
+
+      bodyCase.appendChild(body);
+      document.body.appendChild(bodyCase);
       body.querySelector('style').textContent = css;
-      this.contentBody.set(body);
+      this.contentBody.set(bodyCase);
       fn(body);
       return body;
     };
