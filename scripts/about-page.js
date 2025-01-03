@@ -1,97 +1,145 @@
 GUI.tab.acquire((contentBody) => {
-  const descriptionTxts = {
-    abt: [
-      `<img src="assets/CS-logo.png" width=100px height=100px style="display: block;margin:auto;"></img> <br> Community Spotlight is a <strong>non-profit</strong> project that is aimed towards providing free promotional content to everyone.\n`,
-      `For Advertisers, Community Spotlight allows you to promote your content for free in the form of imagery, video, or HTML.
-      You have the ability to Promote any work of yours, including games, songs, websites, and more!\n`,
-      `For Developers, Community Spotlight allows you to display pomotions for free with no sign-up required!`,
-      `You will not be making any profit. You simply have the ability to fill empty space in your sites/games
-      while helping others!`,
-    ],
-    contact: `
-      Feel free to contact the Community Spotlight Team through:
-      <br /><br />
-
-      <a href="https://discord.gg/DzwQf2tJyW"><img src="assets/DiscordLogo.svg" width=50px height=50px style="display: block;margin:auto;"></img></a>
-      <!-- there's no way i can mess up now -->
-    `
+  const texts = {
+    main1: `<b>Community Spotlight</b> is a <b>non-profit project</b> dedicated to supporting creators, artists, and developers by offering <b>free promotional services.</b>`,
+    main2: `Our goal is to highlight and showcase talent, projects, and events within the community, providing a platform for visibility and growth. Our team strives to foster engagement, encourage creativity, and build positive connections.`,
+    advert1: `Community Spotlight allows you to Promote your content in the form of promotional Images, Videos, or HTML Embeds. This is all done <b>free of charge!</b>`,
+    advert2: `You have the freedom to promote any work of yours, including games, songs, websites, and more.`,
+    advert3: `To upload your Promotions, check out our Uploader Form by clicking the "Submit a Promo" Button above. You'll find our Guidelines and other rules there.`,
+    devs1: `Community Spotlight allows you to display Promotions for <b>free</b> with no required Sign-Ups or API keys!`,
+    devs2: `Since we are a <b>non-profit</b>, you will <b>not</b> be making any financial profit. You are simply helping other people promote their work.`,
+    devs3: `To display Promotions in your project, check out our Developer Exports by clicking the "For Developers" Button above.`,
+    contact1: `Connect with the Community Spotlight Team through our Discord!`,
+    contact2: `Join us to stay updated with announcements, get assistance, and engage with other promoters in the community! It's the perfect place to ask questions, share ideas, and collaborate.`,
   };
 
- //About us 1
- let about1 = document.createElement("div")
- about1.classList = "about-card"
- about1.innerHTML = descriptionTxts.abt[0];
+  const mainCard = document.createElement("div");
+  mainCard.classList.add("card");
+  mainCard.innerHTML = `
+    <img class="logo-img" draggable="false" src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/CS-logo.svg">
+    <div class="holder">
+      <div class="title">What is Community Spotlight?</div>
+      ${texts.main1}<br><br>${texts.main2}
+    </div>
+  `;
 
- //About us 2
- let about2 = document.createElement("div")
- about2.classList = "about-card"
- about2.id = "about-card2"
- about2.innerHTML = "<img src='assets/submission-example.png'>";
- about2.innerHTML += `<div> ${ descriptionTxts.abt[1] } </div>`;
+  const advertiserCard = document.createElement("div");
+  advertiserCard.classList.add("card-flex");
+  advertiserCard.id = "advertise";
+  advertiserCard.innerHTML = `
+    <div class="inline-img" style="width: 40em; margin-right: 15px;">
+      <img draggable="false" src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/submission-example.png">
+    </div>
+    <div class="holder">
+      <div class="title">For Advertisers</div>
+      ${texts.advert1}<br><br>${texts.advert2}<br><br>${texts.advert3}
+    </div>
+  `;
 
- //About us 3
- let about3 = document.createElement("div")
- about3.classList = "about-card"
- about3.id = "about-card3"
- about3.innerHTML = `<div> ${ descriptionTxts.abt[2] } </div>`;
- about3.innerHTML += "<img src='assets/demo.png'>";
- about3.innerHTML += `<div> ${ descriptionTxts.abt[3] } </div>`;
+  const devCard = document.createElement("div");
+  devCard.classList.add("card-flex");
+  devCard.id = "develop";
+  devCard.innerHTML = `
+    <div class="holder">
+      <div class="title">For Developers</div>
+      ${texts.devs1}<br><br>${texts.devs2}<br><br>${texts.devs3}
+    </div>
+    <div class="inline-img" style="width: 60em; margin-left: 15px;">
+      <img draggable="false" src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/demo.png">
+    </div>
+  `;
 
- //Contact us
- let contact = document.createElement("div")
- contact.classList = "about-card"
- contact.innerHTML = descriptionTxts.contact;
+  const contactCard = document.createElement("div");
+  contactCard.classList.add("card");
+  contactCard.innerHTML = `
+    <div class="holder">
+      <div class="title">Contact</div>
+      ${texts.contact1}<br><br>${texts.contact2}
+    </div>
+    <a class="contact-btn" href="https://discord.gg/DzwQf2tJyW" target="_blank">
+      <img draggable="false" src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/DiscordLogo.svg">
+    </a>
+  `;
 
-  // Append to Content Body
-  contentBody.append(about1, about2, about3, contact, GUI.makeBreak());
+  contentBody.append(mainCard, advertiserCard, devCard, contactCard);
 }, `
-.about-card {
+.content-body {
+  margin: 20px;
+}
+
+.content-body .logo-img {
+  margin-bottom: 5px;
+}
+
+.content-body .card {
   background: var(--theme-gradient);
-  padding: 50px;
-  margin: 30px;
+  width: auto;
+  max-width: 50vw;
+  margin: 15px;
+  padding: 20px 20px 40px 20px;
+  border-radius: 20px;
+  position: relative;
+}
+.content-body .card-flex {
+  background: var(--theme-gradient);
+  width: auto;
+  max-width: 80vw;
+  margin: 15px 15px 25px 15px;
+  padding: 20px 20px 40px 20px;
+  border-radius: 20px;
+  display: flex;
+  position: relative;
+}
+.content-body .card-flex[id="advertise"] {
+  left: -40%;
+  transform: translate(40%, 0);
+}
+.content-body .card-flex[id="develop"] {
+  left: 40%;
+  transform: translate(-40%, 0);
+}
+
+.content-body .holder {
+  background-color: var(--bg-box);
+  padding: 10px;
+  border: solid grey 2px;
   border-radius: 10px;
-  color: #fff;
-  text-align: left;
 }
-
-#about-card2 {
-  max-width: 111ch;
-  align-self: flex-start;
-  padding: 20px 0;
-}
-
-#about-card2 div {
-  padding: 80px 15px;
-}
-
-#about-card2 img {
-  float: left;
-  padding-right: 20px;
-  padding-left: 30px;
-  position: relative;
-  display: block;
-  height: 200px; 
+.content-body .card-flex .holder {
   width: auto;
-  border-radius: 15px;
 }
 
-#about-card3 {
-  max-width: 90ch;
-  align-self: flex-end;
-  padding: 20px 15px;
+.content-body .holder .title {
+  font-size: 1.3em;
+  font-family: Tilt Warp;
+  white-space: nowrap;
+  margin-bottom: 5px;
+  border-bottom: dashed 2px var(--text-colour);
 }
 
-#about-card3 div {
-  padding: 30px 20px;
+.content-body .inline-img {
+  background-color: var(--bg-box);
+  padding: 10px;
+  border: solid grey 2px;
+  border-radius: 10px;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  display: grid;
+}
+.content-body .inline-img img {
+  border-radius: 10px;
+  width: 100%;
 }
 
-#about-card3 img {
-  padding-right: 20px;
-  padding-left: 20px;
-  position: relative;
-  display: block;
-  height: 200px; 
-  width: auto;
-  border-radius: 15px;
+.content-body .contact-btn img {
+  margin-top: 25px;
+  width: 25%;
+  transition: transform 200ms ease-in-out, box-shadow 300ms ease-in-out;
+  transform: scale(1);
+  cursor: pointer;
+}
+.content-body .contact-btn img:hover {
+  transform: scale(1.1);
 }
 `);
