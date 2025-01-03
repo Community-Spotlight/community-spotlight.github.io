@@ -19,6 +19,7 @@ GUI.tab.acquire(async (contentBody) => {
   const constructItem = (user, specialTag) => {
     const userDiv = document.createElement("div");
     userDiv.classList.add("user-div");
+    userDiv.style.opacity = "0";
 
     const avatar = document.createElement("img");
     avatar.setAttribute("draggable", "false");
@@ -36,8 +37,8 @@ GUI.tab.acquire(async (contentBody) => {
       e.stopPropagation();
     });
     avatar.onload = () => {
-      avatar.animate([{ opacity: "0" }, { opacity: "1" }], { duration: 400, easing: "ease-in-out" });
-      avatar.style.opacity = "1";
+      userDiv.animate([{ opacity: "0" }, { opacity: "1" }], { duration: 400, easing: "ease-in-out" });
+      userDiv.style.opacity = "1";
     };
     return userDiv;
   };
