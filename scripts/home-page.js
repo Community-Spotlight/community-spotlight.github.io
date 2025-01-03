@@ -26,7 +26,7 @@ h1 {
 
 .header {
   text-shadow: -0.1px 5.8px 6.5px hsl(151deg 100% 24% / 0.34);
-  background-image: url('assets/stacked-waves-haikei.svg');
+  background-image: url('https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/stacked-waves-haikei.svg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
