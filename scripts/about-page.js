@@ -52,7 +52,7 @@ GUI.tab.acquire((contentBody) => {
   contactCard.classList.add("card");
   contactCard.innerHTML = `
     <div class="holder">
-      <div class="title">Contact</div>
+      <div class="title">Contact Us</div>
       ${texts.contact1}<br><br>${texts.contact2}
     </div>
     <a class="contact-btn" href="https://discord.gg/DzwQf2tJyW" target="_blank">
