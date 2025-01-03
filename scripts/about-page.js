@@ -112,7 +112,7 @@ GUI.tab.acquire((contentBody) => {
   font-size: 1.3em;
   font-family: Tilt Warp;
   white-space: nowrap;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   border-bottom: dashed 2px var(--text-colour);
 }
 
