@@ -3,11 +3,11 @@ window.GUI_Nav = new (function() {
   this.globalEvents = new GUI_Imports.EventEmitter();
   this.node = document.querySelector('[for="nav"]');
   this.node.innerHTML = `<div class="logo" data-name="logo" role="button" aria-pressed="false" tabindex="0" data-tab="false">
-    <img src="./assets/CS-logo.svg"></img>
+    <img src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/CS-logo.svg"></img>
     <div style="padding: 0px 5px; margin-right: 5px;">Community Spotlight</div>
   </div>
   <div class="nav-btn" data-name="theme-switch" role="button" aria-pressed="false" tabindex="1" data-tab="false">
-    <img src="./assets/light.svg"></img>
+    <img src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/light.svg"></img>
     <span>Light Mode</span>
   </div>`;
   this.tabindex = 2;
@@ -20,7 +20,7 @@ window.GUI_Nav = new (function() {
     btn.setAttribute('tabindex', String(this.tabindex));
     btn.setAttribute('draggable', 'false');
     this.node.appendChild(btn);
-    btn.innerHTML = `<img src="./assets/${asset}" draggable="false" /><span role="presentation"></span>`;
+    btn.innerHTML = `<img src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/${asset}" draggable="false" /><span role="presentation"></span>`;
     btn.querySelector('span').textContent = text;
     this.tabindex++;
   };
