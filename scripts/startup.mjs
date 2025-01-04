@@ -69,7 +69,7 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
   this.globalEvents.on('tab-switch', (name) => this.tab.set(name));
   
   this.tab = new (function(GUI, GUI_Imports) {
-    this.current = GUI_Imports.URLParams.get('page') || '';
+    this.current = GUI_Imports.URLParams.get('page') || 'home';
     this.contentBody = new (function() {
       this.scripts = [];
       this.node = document.querySelector('div.content-case') || null;
