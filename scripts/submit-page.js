@@ -60,7 +60,7 @@ GUI.tab.acquire((contentBody) => {
 }
 .content-body .btn-out {
   background: linear-gradient(135deg, #00ff84, #00c9ff);
-  width: min-content;
+  width: 100%;
   padding: 7px;
   border-radius: 15px;
   transition: transform 200ms ease-in-out, box-shadow 300ms ease-in-out;
@@ -81,6 +81,6 @@ GUI.tab.acquire((contentBody) => {
   font-size: 1.3em;
   font-family: Tilt Warp;
   white-space: wrap;
-  width: min-content;
+  width: auto;
 }
 `);
