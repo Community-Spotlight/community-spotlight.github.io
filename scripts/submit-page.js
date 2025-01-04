@@ -80,7 +80,7 @@ GUI.tab.acquire((contentBody) => {
   user-select: none;
   font-size: 1.3em;
   font-family: Tilt Warp;
-  white-space: wrap
+  white-space: wrap;
   width: min-content;
 }
 `);
