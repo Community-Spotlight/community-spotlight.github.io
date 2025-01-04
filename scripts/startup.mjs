@@ -49,7 +49,6 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
     this.data.dark ??= true;
   })(GUI_Imports);
   await (this.importScript('./scripts/nav.js').loadPromise);
-  await (this.importScript('https://raw.githubusercontent.com/Community-Spotlight/promotion-exports/refs/heads/main/scripts/community-spotlight.js'));
   if (this.csStorage.data.dark) document.body.dataset.dark = 'true';
   else delete document.body.dataset.dark;
 
