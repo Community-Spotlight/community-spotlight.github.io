@@ -14,7 +14,7 @@ GUI.tab.acquire(async (contentBody) => {
   }
 
   const texts = {
-    main1: `Looking to show our Promotions in Your Project?`,
+    main1: `Looking to display Promotions like this in Your Project?:`,
     main2: `Use our Developer Exports! In this page, we'll document and direct you on how to use the Community Spotlight Promotion Exports.`,
     download1: `First, download the most recent version of our Exports:`,
     download2: `Or, check out our <b>GitHub Repository:</b>`,
@@ -30,12 +30,10 @@ GUI.tab.acquire(async (contentBody) => {
   const code = {
     // excuse the formatting
     // it needs to be like this to not look bad in the site
-    setup:
-`
+    setup: `
 // comment test
-refreshPromos()
-`,
-    
+refreshPromos()`,
+    test: ``,
   };
 
   const mainCard = document.createElement("div");
@@ -98,9 +96,7 @@ refreshPromos()
     <div class="holder">
       <div class="title">Documentation</div>
       ${texts.setup}<br>
-      <pre><code class="language-javascript">
-${code.setup}
-      </code></pre>
+      <pre><code class="language-javascript">${code.setup}</code></pre>
     </div>
   `;
 
