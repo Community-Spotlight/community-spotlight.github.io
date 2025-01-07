@@ -172,8 +172,12 @@ refreshPromos()
 }
 
 .content-body pre.language-javascript {
+  background-color: var(--bg-box-darker);
   border: 2px solid grey;
   border-radius: 15px;
   margin: 15px;
+}
+.content-body code.language-javascript {
+  text-shadow: none;
 }
 `);
