@@ -1,6 +1,6 @@
 GUI.tab.acquire((contentBody) => {
-  const header = document.createElement('h1')
-  header.innerHTML = `<span class="themeTextGradient">Free</span> promotional media for <span class="themeTextOutline">everyone</span>`
+  const header = document.createElement("h1")
+  header.innerHTML = `<span class="themeText">Free</span> Promotional Media for <span class="themeText">Everyone</span>`
   header.className = "header"
 
   contentBody.append( header, GUI.makeBreak());
@@ -11,19 +11,11 @@ h1 {
   font-size: 130px;
   color: white;
 }
-
-.themeTextGradient {
-  background: var(--theme-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.themeTextOutline {
+.themeText {
   -webkit-text-stroke-color: var(--theme-green);
   -webkit-text-stroke-width: thin;
   color: transparent;
 }
-
 .header {
   text-shadow: -0.1px 5.8px 6.5px hsl(151deg 100% 24% / 0.34);
   background-image: url('https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/stacked-waves-haikei.svg');
