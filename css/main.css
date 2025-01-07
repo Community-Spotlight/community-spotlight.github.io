@@ -2,6 +2,7 @@ body {
   --text-colour: black;
   --bg-colour: white;
   --bg-box: #ffffff;
+  --bg-box-dark: #f0f0f0;
   --theme-gradient: linear-gradient(10deg, #00aad9 15%, #00d970 85%);
   --theme-blue: #00aad9;
   --theme-green: #00d970;
@@ -23,6 +24,7 @@ body[data-dark="true"] {
   --text-colour: white !important;
   --bg-colour: black !important;
   --bg-box: #1e1e1e !important;
+  --bg-box-dark: #141414 !important;
   --body-colour: #1e1e1e !important;
   --radial-colour: #484848 !important;
 }
