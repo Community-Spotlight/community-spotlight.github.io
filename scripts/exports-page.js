@@ -32,8 +32,10 @@ GUI.tab.acquire(async (contentBody) => {
     // it needs to be like this to not look bad in the site
     setup: `
 // comment test
-refreshPromos()`,
-    test: ``,
+refreshPromos()
+`,
+    test: `
+`,
   };
 
   const mainCard = document.createElement("div");
@@ -95,7 +97,7 @@ refreshPromos()`,
   documentation.innerHTML = `
     <div class="holder">
       <div class="title">Documentation</div>
-      ${texts.setup}<br>
+      ${texts.setup.trim()}<br>
       <pre><code class="language-javascript">${code.setup}</code></pre>
     </div>
   `;
