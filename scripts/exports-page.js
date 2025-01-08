@@ -1,9 +1,3 @@
-/*
-TODO
--box for importing script
--show ads
--example return obj
-*/
 GUI.tab.acquire(async (contentBody) => {
   // load the Prism Library if not already loaded
   const PrismExists = document.querySelector(`script[class="Prism"]`);
@@ -19,21 +13,48 @@ GUI.tab.acquire(async (contentBody) => {
     document.head.appendChild(PrismCSS);
   }
 
+  const getImgPromo = async (params) => {
+    const promo = await getOnlinePromoCS("image", params);
+    const promoDiv = document.createElement("div");
+    const mediaDiv = document.createElement("img");
+    mediaDiv.setAttribute("title", promo.promoter);
+    mediaDiv.src = promo.url;
+    mediaDiv.addEventListener("click", (e) => {
+      window.open(promo["promoter-url"], "_blank");
+      e.stopPropagation();
+    });
+
+    promoDiv.appendChild(mediaDiv);
+    return promoDiv.innerHTML;
+  };
+
   const texts = {
     main1: `Looking to display Promotions like this in Your Project?:`,
     main2: `Use our Developer Exports! In this page, we'll document and direct you on how to use the Community Spotlight Promotion Exports.`,
     download1: `First, download the most recent version of our Exports:`,
     download2: `Or, check out our <b>GitHub Repository:</b>`,
 
+    import1: `First, import the Exports script. You can do this by using a <b>HTML Script</b> or by pasting the <b>JS Directly</b>`,
+    import2: `You are allowed to use a Local Copy of the Exports File.`,
     setup1: `With our Exports, you have the choice to Fetch Promotions either <b>Online</b> or through <b>Stored Cache.</b>`,
     setup2: `The difference between the two is that <b>Stored Cache</b> performs a <i>single</i> Fetch of the Promotion List and <b>saves it in the 'window' for future use,</b> while <b>Online Fetching</b> retrieves the list on <i>every</i> 'getOnlinePromoCS' call.`,
     setup3: `Here’s how to setup the Exports:`,
-
     usage1: `Here's how to use 'getOnlinePromoCS' and 'getCachedPromoCS' to retrieve specific Promotions based on specific Parameters. <i>(Note: all Parameters are <u>optional</u>)</i>`,
+    usage2: `These functions will both return Promotion JSON like the following:`,
   };
   const code = {
     // excuse the formatting
     // it needs to be like this to not look bad in the site
+    import: `
+/* HTML method */
+&lt;script src="https://cdn.jsdelivr.net/gh/Community-Spotlight/promotion-exports/scripts/community-spotlight.js"&gt;&lt;/script&gt;
+
+/* JS method */
+function importCommunitySpotlight() {
+  // insert JS code here...
+}
+importCommunitySpotlight();
+`,
     setup: `
 /* Stored Cache */
 // use this to initialize the Cache
@@ -52,7 +73,6 @@ await getOnlinePromoCS("video", {});
 `,
     usage: `
 // both functions use the same Parameter rules
-// both will return JSON data for a radomized Promotion
 await getOnlinePromoCS(type, optParams);
 getCachedPromoCS(type, optParams);
 
@@ -78,8 +98,15 @@ getCachedPromoCS("video", {
 });
 `,
     example: `
-
-`
+{
+  "expires": "...", // expiry date
+  "id": "...", // promotion ID
+  "promoter": "...", // promotion name
+  "promoter-url": "https://...", // promotion direct url
+  "tags": [...], // promotion tags
+  "url": "https://..." // promotion media url
+}
+`,
   };
 
   const mainCard = document.createElement("div");
@@ -87,7 +114,7 @@ getCachedPromoCS("video", {
   mainCard.innerHTML = `
     <div class="holder">
       <div class="title">Developer Exports</div>
-      ${texts.main1}<br><br>${texts.main2}
+      ${texts.main1}${await getImgPromo({ aspectRatio: "360x120" })}<br>${texts.main2}
     </div>
   `;
 
@@ -141,6 +168,8 @@ getCachedPromoCS("video", {
   docsSetup.innerHTML = `
     <div class="holder">
       <div class="title">Documentation -- Setup</div>
+      ${texts.import1}<br><br>${texts.import2}<br>
+      <pre><code class="language-javascript">${code.import.trim()}</code></pre>
       ${texts.setup1}<br><br>${texts.setup2}<br><br>${texts.setup3}<br>
       <pre><code class="language-javascript">${code.setup.trim()}</code></pre>
     </div>
@@ -153,6 +182,8 @@ getCachedPromoCS("video", {
       <div class="title">Documentation -- Fetching Promotion Data</div>
       ${texts.usage1}<br>
       <pre><code class="language-javascript">${code.usage.trim()}</code></pre>
+      ${texts.usage2}<br>
+      <pre><code class="language-javascript">${code.example.trim()}</code></pre>
     </div>
   `;
 
@@ -234,7 +265,7 @@ getCachedPromoCS("video", {
 .content-body code.language-javascript {
   color: #e88922;
   text-shadow: none;
-  font-size: 0.82em;
+  font-size: 0.85em;
   line-height: 1;
 }
 .content-body code [class="token operator"] {
