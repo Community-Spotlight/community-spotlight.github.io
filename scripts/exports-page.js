@@ -172,7 +172,7 @@ refreshPromos()
 }
 
 .content-body pre.language-javascript {
-  background-color: var(--bg-box-darker);
+  background-color: var(--bg-box-dark);
   border: 2px solid grey;
   border-radius: 15px;
   margin: 15px;
