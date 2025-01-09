@@ -1,13 +1,15 @@
-# site-real
+# Community Spotlight -- Main Site
 
-<!-- Todo: work on this README -->
-READ LICENSING
+Welcome to the **Community Spotlight Main Site**, the hub for discovering and documenting the Project!
 
-## Licensing
+## About Community Spotlight
+Community Spotlight is a **non-profit initiative** designed to offer **free promotional content** to individuals and organizations. Our goal is to foster creativity, collaboration, and visibility for everyone involved.
 
-THIS REPO IS PRIVATE; THE LICENSE IS ARR FOR EVERYTHING, DO NOT LEAK ANY FILES OR URLS TO OUTSIDE PARTYS.
+## Join Our Community
+Connect with the Community Spotlight Team and other members through our **[Discord Server:](https://discord.gg/JqSuhvWkFM)**
+- Get announcements and updates.
+- Receive help with features and site functionality.
+- Chat with other creators and promoters.
 
-<!-- We will use this when the site is actually public -->
-<!-- All files under the assets directory are MIT unless specified as otherwise in an ajacent README or note in the file;
-
-All other files in this repository (discluding README files of any kind) are licensed under AGPL-3.0 with NO exclusions. -->
+## Licence
+All Promotions within this project are licenced under **MIT**.
