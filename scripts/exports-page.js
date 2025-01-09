@@ -18,6 +18,7 @@ GUI.tab.acquire(async (contentBody) => {
     const promoDiv = document.createElement("div");
     const mediaDiv = document.createElement("img");
     mediaDiv.setAttribute("title", promo.promoter);
+    mediaDiv.classList.add("promotion");
     mediaDiv.src = promo.url;
     mediaDiv.addEventListener("click", (e) => {
       window.open(promo["promoter-url"], "_blank");
@@ -191,6 +192,12 @@ getCachedPromoCS("video", {
 }, `
 .content-body {
   margin: 20px;
+}
+.content-body .promotion {
+  width: 90%;
+  margin: 15px;
+  border: 2px grey solid;
+  border-radius: 15px;
 }
 
 .content-body .card {
