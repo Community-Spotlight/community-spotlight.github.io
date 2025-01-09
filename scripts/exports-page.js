@@ -111,7 +111,7 @@ getCachedPromoCS("video", {
   mainCard.innerHTML = `
     <div class="holder">
       <div class="title">Developer Exports</div>
-      ${texts.main1}${await getImgPromo({ aspectRatio: "360x120" })}<br>${texts.main2}
+      ${texts.main1}<br>${await getImgPromo({ aspectRatio: "360x120" })}<br>${texts.main2}
     </div>
   `;
 
