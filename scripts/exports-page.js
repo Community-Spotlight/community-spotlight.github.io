@@ -20,11 +20,7 @@ GUI.tab.acquire(async (contentBody) => {
     mediaDiv.setAttribute("title", promo.promoter);
     mediaDiv.classList.add("promotion");
     mediaDiv.src = promo.url;
-    mediaDiv.addEventListener("click", (e) => {
-      window.open(promo["promoter-url"], "_blank");
-      e.stopPropagation();
-    });
-
+    mediaDiv.setAttribute("onclick", `window.open("${promo["promoter-url"]}", "_blank")`);
     promoDiv.appendChild(mediaDiv);
     return promoDiv.innerHTML;
   };
@@ -198,6 +194,7 @@ getCachedPromoCS("video", {
   margin: 15px;
   border: 2px grey solid;
   border-radius: 15px;
+  cursor: pointer;
 }
 
 .content-body .card {
