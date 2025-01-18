@@ -1,17 +1,28 @@
 GUI.tab.acquire(async (contentBody) => {
   // load the Prism Library if not already loaded
-  const PrismExists = document.querySelector(`script[class="Prism"]`);
-  if (!PrismExists) {
-    const PrismScript = document.createElement("script");
-    PrismScript.src = "./scripts/libraries/Prism.js";
-    document.body.appendChild(PrismScript);
+  const loadPrismLibrary = () => {
+    return new Promise((resolve) => {
+      const PrismExists = document.querySelector(`script[class="Prism"]`);
+      if (PrismExists) {
+        resolve(); // Prism is already loaded
+        return;
+      }
 
-    const PrismCSS = document.createElement("link");
-    PrismCSS.setAttribute("href", "./scripts/libraries/Prism.css");
-    PrismCSS.setAttribute("rel", "stylesheet");
-    PrismCSS.setAttribute("type", "text/css")
-    document.head.appendChild(PrismCSS);
-  }
+      const PrismScript = document.createElement("script");
+      PrismScript.src = "./scripts/libraries/Prism.js";
+      PrismScript.classList.add("Prism");
+      PrismScript.onload = resolve;
+      PrismScript.onerror = resolve;
+      document.body.appendChild(PrismScript);
+
+      const PrismCSS = document.createElement("link");
+      PrismCSS.setAttribute("href", "./scripts/libraries/Prism.css");
+      PrismCSS.setAttribute("rel", "stylesheet");
+      PrismCSS.setAttribute("type", "text/css");
+      document.head.appendChild(PrismCSS);
+    });
+  };
+  await loadPrismLibrary();
 
   const getImgPromo = async (params) => {
     const promo = await getOnlinePromoCS("image", params);
