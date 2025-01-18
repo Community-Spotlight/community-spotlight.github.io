@@ -22,7 +22,6 @@ GUI.tab.acquire(async (contentBody) => {
       document.head.appendChild(PrismCSS);
     });
   };
-  await loadPrismLibrary();
 
   const getImgPromo = async (params) => {
     const promo = await getOnlinePromoCS("image", params);
@@ -171,6 +170,9 @@ getCachedPromoCS("video", {
   cardBtns[1].addEventListener("click", (e) => handleClick(e, true));
   cardBtns[2].addEventListener("click", (e) => window.open("https://github.com/Community-Spotlight/promotion-exports", "_blank"));
 
+  contentBody.append(mainCard, downloadCard);
+  await loadPrismLibrary();
+
   const docsSetup = document.createElement("div");
   docsSetup.classList.add("card-big");
   docsSetup.innerHTML = `
@@ -195,7 +197,7 @@ getCachedPromoCS("video", {
     </div>
   `;
 
-  contentBody.append(mainCard, downloadCard, docsSetup, docsUsage);
+  contentBody.append(docsSetup, docsUsage);
   Prism.highlightAll();
 }, `
 .content-body {
