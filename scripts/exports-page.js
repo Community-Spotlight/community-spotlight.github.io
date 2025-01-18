@@ -196,6 +196,7 @@ getCachedPromoCS("video", {
   `;
 
   contentBody.append(mainCard, downloadCard, docsSetup, docsUsage);
+  Prism.highlightAll();
 }, `
 .content-body {
   margin: 20px;
