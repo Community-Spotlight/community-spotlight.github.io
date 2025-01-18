@@ -1,15 +1,42 @@
 GUI.tab.acquire((contentBody) => {
+  const titles = [
+    "test",
+    "test2",
+  ];
   const sections = {
-    main1: `<b>Community Spotlight</b> is a <b>non-profit project</b> dedicated to supporting creators, artists, and developers by offering <b>free promotional services.</b>`,
-    main2: `Our goal is to highlight and showcase talent, projects, and events within the community, providing a platform for visibility and growth. Our team strives to foster engagement, encourage creativity, and build positive connections.`,
-    advert1: `Community Spotlight allows you to Promote your content in the form of promotional Images, Videos, or HTML Embeds. This is all done <b>free of charge!</b>`,
-    advert2: `You have the freedom to promote any work of yours, including games, songs, websites, and more.`,
-    advert3: `To upload your Promotions, check out our Uploader Form by clicking the "Submit a Promo" Button above. You'll find our Guidelines and other rules there.`,
-    devs1: `Community Spotlight allows you to display Promotions for <b>free</b> with no required Sign-Ups or API keys!`,
-    devs2: `Since we are a <b>non-profit</b>, you will <b>not</b> be making any financial profit. You are simply helping other people promote their work.`,
-    devs3: `To display Promotions in your project, check out our Developer Exports by clicking the "For Developers" Button above.`,
-    contact1: `Connect with the Community Spotlight Team through our Discord!`,
-    contact2: `Join us to stay updated with announcements, get assistance, and engage with other promoters in the community! It's the perfect place to ask questions, share ideas, and collaborate.`,
+    test: `<b>Community Spotlight</b> is a <b>non-profit project</b> dedicated to supporting creators, artists, and developers by offering <b>free promotional services.</b>`,
+    test2: `<b>Community Spotlight</b> is a <b>non-profit project</b> dedicated to supporting creators, artists, and developers by offering <b>free promotional services.</b>`,
+  };
+
+  const makeCapsule = (title) => {
+    const capsule = document.createElement("div");
+    capsule.classList.add("capsule");
+    capsule.innerHTML = `
+      <div class="capsule-contain">
+        <img class="flipper-img" draggable="false" src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/arrow-right.svg">
+        <div class="header">${title}</div>
+      </div>
+      <div class="text">${sections[title]}</div>
+    `;
+
+    const arrow = capsule.querySelector(`img[class="flipper-img"]`);
+    const text = capsule.querySelector(`div[class="text"]`);
+    arrow.addEventListener("click", (e) => {
+      const isOpen = capsule.classList.toggle("open");
+      if (isOpen) {
+        text.style.height = `${text.scrollHeight}px`;
+        text.style.paddingTop = "10px";
+        arrow.style.transform = "rotate(90deg)";
+      } else {
+        text.style.height = "0px";
+        text.style.paddingTop = "0px";
+        arrow.style.transform = "rotate(0deg)";
+      }
+
+      e.stopPropagation();
+    });
+
+    return capsule;
   };
 
   const mainCard = document.createElement("div");
@@ -18,12 +45,11 @@ GUI.tab.acquire((contentBody) => {
     <img class="logo-img" draggable="false" src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/CS-logo.svg">
     <div class="holder">
       <div class="title">Terms of Service</div>
-      ${sections.main1}<br><br>${sections.main2}
-      <div class="title">1) ...</div>
-      ${sections.main1}<br><br>${sections.main2}
     </div>
   `;
 
+  const holder = mainCard.querySelector(`div[class="holder"]`);
+  for (let i = 0; i < titles.length; i++) holder.appendChild(makeCapsule(titles[i]));
   contentBody.append(mainCard);
 }, `
 .content-body {
@@ -33,10 +59,34 @@ GUI.tab.acquire((contentBody) => {
 .content-body .logo-img {
   margin-bottom: 5px;
 }
+.content-body .flipper-img {
+  margin: 5px;
+  width: 20px;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.content-body .title {
+  font-size: 1.2em;
+  font-family: Tilt Warp;
+  margin-bottom: 10px;
+  border-bottom: dashed 2px var(--text-colour);
+}
+.content-body .header {
+  font-size: 1.3em;
+  font-family: Tilt Warp;
+  margin-left: 10px;
+}
+.content-body .text {
+  overflow: hidden;
+  transition: height 0.3s ease-in-out, padding 0.3s ease-in-out;
+  height: 0px;
+}
+
 .content-body .card {
   background: var(--theme-gradient);
   width: auto;
-  max-width: 50vw;
+  max-width: 70vw;
   margin: 15px;
   padding: 20px 20px 40px 20px;
   border-radius: 20px;
@@ -49,10 +99,18 @@ GUI.tab.acquire((contentBody) => {
   border: solid grey 2px;
   border-radius: 10px;
 }
-.content-body .holder .title {
-  font-size: 1.3em;
-  font-family: Tilt Warp;
-  margin-bottom: 10px;
-  border-bottom: dashed 2px var(--text-colour);
+.content-body .capsule {
+  background-color: var(--bg-box);
+  padding: 10px;
+  margin: 20px 10px 20px 10px;
+  border: solid grey 2px;
+  border-radius: 10px;
+}
+.content-body .capsule-contain {
+  margin-left: 10px;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  justify-items: left;
 }
 `);
