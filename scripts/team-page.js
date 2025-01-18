@@ -104,7 +104,7 @@ GUI.tab.acquire(async (contentBody) => {
 }
 .content-body .user-div img {
   background-color: var(--bg-box);
-  width: 10vw;
+  width: 100px;
   border: solid grey 2px;
   border-radius: 10px;
 }
