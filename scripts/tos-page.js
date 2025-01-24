@@ -1,7 +1,7 @@
 GUI.tab.acquire((contentBody) => {
   const effectiveDate = "January 23, 2025";
   const endMessage = `Thank you for reading and for using <b>Community Spotlight!</b> to share and support creative projects!`;
-  const contact = `through our <a href="https://discord.gg/DzwQf2tJyW" target="_blank">Discord</a> or by emailing us at <u></u>`;
+  const contact = `through our <b><a href="https://discord.gg/DzwQf2tJyW" target="_blank">Discord</a></b> or by emailing us at <b><a href="mailto:communityspotlighthelp@gmail.com">CommunitySpotlightHelp@gmail.com</a></b>`;
 
   const sections = {
     "Introduction":
