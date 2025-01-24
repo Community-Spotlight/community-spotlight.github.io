@@ -119,8 +119,8 @@ body[data-dark="true"] {
 
 /* clickable urls */
 a {
-  color: --link-normal-color;
+  color: var(--link-normal-color);
 }
 a:visited {
-  color: --link-visited-color;
+  color: var(--link-visited-color);
 }
