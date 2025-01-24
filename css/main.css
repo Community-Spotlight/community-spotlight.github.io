@@ -9,6 +9,9 @@ body {
   --body-colour: #f9f9f9;
   --radial-colour: #dddddd;
 
+  --link-normal-color: #0000EE;
+  --link-visited-color: #551A8B;
+  
   overflow-y: hidden;
   margin: 0px;
   color: var(--text-colour);
@@ -27,6 +30,9 @@ body[data-dark="true"] {
   --bg-box-dark: #141414 !important;
   --body-colour: #1e1e1e !important;
   --radial-colour: #484848 !important;
+
+  --link-normal-color: #00c0ee !important;
+  --link-visited-color: #e715cc !important;
 }
 
 .nav-bar {
@@ -109,4 +115,12 @@ body[data-dark="true"] {
   background: linear-gradient(to bottom, #00ff84, #00c9ff); 
   border: 1.5px #008000 solid;
   border-radius: 14px;
+}
+
+/* clickable urls */
+a {
+  color: --link-normal-color;
+}
+a:visited {
+  color: --link-visited-color;
 }
