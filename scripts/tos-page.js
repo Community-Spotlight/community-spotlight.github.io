@@ -1,7 +1,7 @@
 GUI.tab.acquire((contentBody) => {
-  const email = "(need an email here, sharkpool!)";
   const effectiveDate = "January 23, 2025";
   const endMessage = `Thank you for reading and for using <b>Community Spotlight!</b> to share and support creative projects!`;
+  const contact = `through our <a href="https://discord.gg/DzwQf2tJyW" target="_blank">Discord</a> or by emailing us at <u></u>`;
 
   const sections = {
     "Introduction":
@@ -14,7 +14,7 @@ GUI.tab.acquire((contentBody) => {
     `<b>All</b> contributions and interactions with <b>Community Spotlight</b> are entirely voluntary. By using <b>Community Spotlight</b>, you confirm that <b>you have the necessary rights</b> to promote the material. As well, Users <b>retain full ownership</b> of their uploaded promotions. By submitting a promotion, you agree that it does <b>not</b> violate any applicable laws or the rights of others.`,
 
     "Prohibited Content":
-    `<b>Copyrighted content is prohibited</b> unless you have <b>explicit permission from the copyright owner</b>. Users must ensure their uploaded content <b>does not infringe on the intellectual property rights of others</b>. Content that is <b>unlawful, harmful, or otherwise inappropriate</b> is <b>strictly prohibited</b>. Content that is <b>generated or partially generated</b> with any LLM or Image Generation model (ChatGPT, Midjourney, Stable Diffusion, et cetera) <b>may not be promoted</b>. <b>Promotions generated with assistance or completely</b> from AI programs or tools will be handled on a <b>case-by-case</b> basis.`,
+    `<b>Copyrighted content is prohibited</b> unless you have <b>explicit permission from the copyright owner</b>. Users must ensure their uploaded content <b>does not infringe on the intellectual property rights of others</b>.<br><br>Content that is <b>unlawful, harmful, or otherwise inappropriate</b> is <b>strictly prohibited</b>. Content that is <b>generated or partially generated</b> with any LLM or Image Generation model (ChatGPT, Midjourney, Stable Diffusion, et cetera) <b>may not be promoted</b>. <b>Promotions generated with assistance or completely</b> from AI programs or tools will be handled on a <b>case-by-case</b> basis.`,
 
     "Content Uploads":
     `Users can upload <b>images, videos, and HTML embeds</b> to promote their projects. By uploading any promotional content, you grant <b>Community Spotlight</b> a <b>non-exclusive, royalty-free license</b> to display and share your content. You <b>retain ownership</b> of your content and are <b>solely responsible for its accuracy, legality, and compliance</b> with these <b>Terms</b>.`,
@@ -26,7 +26,7 @@ GUI.tab.acquire((contentBody) => {
     `<b>Community Spotlight</b> reserves the right to <b>remove or refuse</b> any promotional material that <b>violates these Terms</b> or is deemed inappropriate. Promotions flagged by <b>users or moderators</b> may be subject to <b>review and removal without notice<b>.`,
 
     "Intellectual Property":
-    `<b>Community Spotlight</b> respects <b>intellectual property rights</b> and expects users to <b>do the same</b>. If you believe your <b>copyright</b> has been <b>infringed upon</b>, please contact us at <b>${email}</b>.`,
+    `<b>Community Spotlight</b> respects <b>intellectual property rights</b> and expects users to <b>do the same</b>. If you believe your <b>copyright</b> has been <b>infringed upon</b>, please contact us ${contact}.`,
 
     "Changes to the Terms":
     `<b>Community Spotlight</b> <b>reserves the right</b> to <b>modify these Terms</b> at any time. Updates will be posted on this page with an updated effective date. Continued use of the platform <b>constitutes acceptance</b> of the revised <b>Terms.</b>`,
@@ -35,11 +35,10 @@ GUI.tab.acquire((contentBody) => {
     `<b>Community Spotlight</b> is provided <b>as is</b> and <b>as available</b>. We make no <b>guarantees regarding uptime, availability, or functionality</b>. We reserve the right to <b>suspend or discontinue</b> any part of the service <b>without prior notice</b>.`,
 
     "Governing Law":
-    `These <b>Terms</b> are <b>governed by</b> and <b>constructed in accordance with</b> the laws of <b>Canada</b>. Any <b>disputes</b> arising under these <b>Terms shall be resolved in</b> the courts of <b>Canada</b>.`,
+    `These <b>Terms</b> are <b>governed by</b> and <b>constructed in accordance with</b> the laws of <b>Canada</b>. Any <b>disputes</b> arising under these <b>Terms</b> shall be resolved through mutual discussion and agreement or, if necessary, in the courts <b>Canada</b>.`,
 
     "Contact Us":
-    `If you have any <b>questions or concerns</b> regarding these <b>Terms</b> or about <b>Community Spotlight</b>, please contact us at <b>${email}</b>.`,
-
+    `If you have any <b>questions or concerns</b> regarding these <b>Terms</b> or about <b>Community Spotlight</b>, please contact us ${contact}.`,
   };
 
   const makeCapsule = (entry) => {
