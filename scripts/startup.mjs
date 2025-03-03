@@ -3,9 +3,12 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
 (async function() {
   globalThis.GUI = this;
   this.imports = GUI_Imports;
-  this.importScript = function(url, skipDeletion) {
+  this.importScript = function(url, skipDeletion, once) {
     skipDeletion = skipDeletion ?? false;
     const node = document.createElement('script');
+    node.loadPromise = Promise.resolve();
+    if (once && this.importScript.cache.has(url)) return node;
+    if (once) this.importScript.cache.add(url);
     node.loadPromise = new Promise((resolve, reject) => {
       node.onload = (...args) => {
         if (!skipDeletion) node.remove();
@@ -18,6 +21,7 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
     });
     return node;
   };
+  this.importScript.cache = new Set();
   this.globalEvents = new GUI_Imports.EventEmitter();
   this.csStorage = new (function(GUI_Imports) {
     const key = 'CS-Storage';
