@@ -1,28 +1,4 @@
 GUI.tab.acquire(async (contentBody) => {
-  // load the Prism Library if not already loaded
-  const loadPrismLibrary = () => {
-    return new Promise((resolve) => {
-      const PrismExists = document.querySelector(`script[class="Prism"]`);
-      if (PrismExists) {
-        resolve(); // Prism is already loaded
-        return;
-      }
-
-      const PrismScript = document.createElement("script");
-      PrismScript.src = "./scripts/libraries/Prism.js";
-      PrismScript.classList.add("Prism");
-      PrismScript.onload = resolve;
-      PrismScript.onerror = resolve;
-      document.body.appendChild(PrismScript);
-
-      const PrismCSS = document.createElement("link");
-      PrismCSS.setAttribute("href", "./scripts/libraries/Prism.css");
-      PrismCSS.setAttribute("rel", "stylesheet");
-      PrismCSS.setAttribute("type", "text/css");
-      document.head.appendChild(PrismCSS);
-    });
-  };
-
   const getImgPromo = async (params) => {
     const promo = await getOnlinePromoCS("image", params);
     const promoDiv = document.createElement("div");
@@ -133,29 +109,29 @@ getCachedPromoCS("video", {
       ${texts.download1}<br>
       <div class="download-div">
         <button class="downloadBtn">
-          <img src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/file-icon.svg">
-          Exports.js
+          <img src="/assets/file-icon.svg">
+          exports.js
         </button>
         <button class="downloadBtn">
-          <img src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/file-icon.svg">
-          Exports.min.js
+          <img src="/assets/file-icon.svg">
+          exports.min.js
         </button>
       </div>
       ${texts.download2}<br>
       <button class="downloadBtn">
-        <img src="https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/CS-logo.svg">
+        <img src="/assets/CS-logo.svg">
       </button>
     </div>
   `;
 
   const handleClick = async (e, isMin) => {
-    const url = `https://raw.githubusercontent.com/Community-Spotlight/promotion-exports/refs/heads/main/scripts/community-spotlight${isMin ? "-min" : ""}.js`;
+    const url = `/promotion-exports/scripts/community-spotlight${isMin ? "-min" : ""}.js`;
     try {
       const response = await fetch(url);
       const blob = await response.blob();
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = isMin ? "CS-Exports-Min.js" : "CS-Exports.js";
+      link.download = isMin ? "CS-exports-min.js" : "CS-exports.js";
       document.body.appendChild(link);
       link.click();
       URL.revokeObjectURL(link.href);
