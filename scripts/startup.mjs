@@ -22,6 +22,21 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
     return node;
   };
   this.importScript.cache = new Set();
+  this.importStyle = function(url, once) {
+    const node = document.createElement('link');
+    node.rel = 'stylesheet';
+    if (once && this.importStyle.cache.has(url)) return node;
+    if (once) {
+      this.importStyle.cache.add(url);
+      document.head.appendChild(node);
+    } else {
+      node.onload = node.remove;
+      document.body.appendChild(node);
+    }
+    node.href = url;
+    return node;
+  };
+  this.importStyle.cache = new Set();
   this.globalEvents = new GUI_Imports.EventEmitter();
   this.csStorage = new (function(GUI_Imports) {
     const key = 'CS-Storage';
