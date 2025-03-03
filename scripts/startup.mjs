@@ -61,8 +61,8 @@ globalThis.WindowEvents = new GUI_Imports.EventEmitter();
   
   this.globalEvents.on('theme-switch', (val, btn, children) => {
     btn.dataset.dark = val;
-    children[0].src = val ? 'https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/light.svg' :
-      'https://raw.githubusercontent.com/Community-Spotlight/assets/refs/heads/main/dark.svg';
+    children[0].src = val ? '/assets/light.svg' :
+      '/assets/dark.svg';
     children[1].textContent = val ? 'Light Mode' : 'Dark Mode';
     if (val) document.body.dataset.dark = 'true';
     else delete document.body.dataset.dark;
