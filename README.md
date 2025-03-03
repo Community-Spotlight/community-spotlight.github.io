@@ -10,6 +10,3 @@ Connect with the Community Spotlight Team and other members through our **[Disco
 - Get announcements and updates.
 - Receive help with features and site functionality.
 - Chat with other creators and promoters.
-
-## Licence
-All Promotions within this project are licenced under **MIT**.
