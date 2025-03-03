@@ -150,7 +150,6 @@ getCachedPromoCS("video", {
   cardBtns[2].addEventListener("click", (e) => window.open("https://github.com/Community-Spotlight/promotion-exports", "_blank"));
 
   contentBody.append(mainCard, downloadCard);
-  await loadPrismLibrary();
 
   const docsSetup = document.createElement("div");
   docsSetup.classList.add("card-big");
