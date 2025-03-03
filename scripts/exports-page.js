@@ -1,6 +1,6 @@
 GUI.tab.acquire(async (contentBody) => {
-  GUI.importStyle('./css/prism.css');
-  await (GUI.importScript('./scripts/prism.js', null, true).loadPromise);
+  GUI.importStyle('/css/prism.css', true);
+  await (GUI.importScript('/scripts/prism.js', null, true).loadPromise);
   
   const getImgPromo = async (params) => {
     const promo = await getOnlinePromoCS("image", params);
