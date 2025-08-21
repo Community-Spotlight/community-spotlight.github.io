@@ -48,7 +48,6 @@ GUI.tab.acquire(async (contentBody) => {
   const userList = users.users;
   userList.forEach((user) => {
     if (user.login === "SharkPool-SP") memberList.insertBefore(constructItem(user, "CEO"), memberList.firstChild);
-    else if (user.login === "yuri-kiss") memberList.insertBefore(constructItem(user, "CO-CEO"), memberList.children[1]);
     else memberList.appendChild(constructItem(user, false));
   });
 
