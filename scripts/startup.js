@@ -43,7 +43,7 @@ Events.on("DOM_LOADED", () => {
     "SET_PAGE",
     url.searchParams.get("page") ?? USER_DATA.page ?? "home",
   );
-  Events.emit("APPLY_THEME", USER_DATA.isDark);
+  Events.emit("APPLY_THEME", USER_DATA.isDark ?? true);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
