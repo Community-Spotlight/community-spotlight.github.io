@@ -38,7 +38,7 @@ Events.on("LOAD_PAGE-developers", async () => {
 
 /* Terms of Service Page */
 Events.on("LOAD_PAGE-tos", async () => {
-  importDependancies(["../pages/html/tos.html", "../styles/tos.css"]);
+  await importDependancies(["../pages/html/tos.html", "../styles/tos.css"]);
 
   await importDependancy("../pages/scripts/tos.js");
   Events.emit("START_SCRIPT", "tos");
@@ -46,7 +46,7 @@ Events.on("LOAD_PAGE-tos", async () => {
 
 /* Team List Page */
 Events.on("LOAD_PAGE-team", async () => {
-  importDependancies(["../pages/html/team.html", "../styles/team.css"]);
+  await importDependancies(["../pages/html/team.html", "../styles/team.css"]);
 
   await importDependancy("../pages/scripts/team.js");
   Events.emit("START_SCRIPT", "team-list");
