@@ -25,7 +25,7 @@ Events.on("LOAD_PAGE-form", () => importDependancy("../pages/html/form.html"));
 
 /* Developer Page */
 Events.on("LOAD_PAGE-developers", async () => {
-  importDependancies([
+  await importDependancies([
     "../pages/html/developers.html",
     "../styles/developers.css",
     "https://dev.prismjs.com/themes/prism-tomorrow.min.css",
