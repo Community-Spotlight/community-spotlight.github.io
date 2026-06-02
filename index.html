@@ -1,22 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: blob:">
-    <meta content="Community Spotlight" property="og:title">
-    <meta content="Community Spotlight is a project aimed at providing Free Promotions for Everyone" property="og:description">
-    <meta content="https://github.com/Community-Spotlight" property="og:url">
-    <meta content="https://community-spotlight.github.io./assets/CS-logo.png" property="og:image">
-    <meta content="#00ff62" data-react-helmet="true" name="theme-color">
     <title>Community Spotlight</title>
-    <link href="https://fonts.googleapis.com/css?family=Tilt+Warp" rel="stylesheet" type="text/css">
-    <link href="./css/main.css" rel="stylesheet" type="text/css">
-    <link href="./css/pages.css" rel="stylesheet" type="text/css">
-    <link rel="shortcut icon" href="./assets/CS-logo.svg" type="image/x-icon">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta content="Community Spotlight" property="og:title" />
+    <meta
+      content="Community Spotlight is a project aimed at providing Free Promotions for Everyone"
+      property="og:description"
+    />
+    <meta
+      content="https://community-spotlight.github.io/uploader-site/"
+      property="og:url"
+    />
+    <meta
+      content="https://cdn.jsdelivr.net/gh/Community-Spotlight/assets/CS-logo.png"
+      property="og:image"
+    />
+    <meta content="#00ff84" data-react-helmet="true" name="theme-color" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://cdn.jsdelivr.net/gh/Community-Spotlight/assets/CS-upload.svg"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Tilt+Warp"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/cards.css" />
   </head>
   <body data-dark="true">
-    <nav class="nav-bar" for="nav" role="toolbar"></nav>
-    <script src="./scripts/startup.mjs" type="module"></script>
+    <nav id="nav-bar" class="nav-bar" role="toolbar">
+      <div class="nav-btn">
+        <img draggable="false" />
+        <span>XXX</span>
+      </div>
+    </nav>
+    <div class="content-container"></div>
+    <script src="./scripts/Events.js"></script>
+    <script src="./scripts/startup.js" type="module"></script>
+    <script src="./scripts/page-loader.js" type="module"></script>
   </body>
 </html>

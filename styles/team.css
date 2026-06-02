@@ -1,0 +1,69 @@
+.team .team-list {
+  display: flex;
+  width: 90vw;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    top: 20px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+
+.team .card-user {
+  padding: 15px 15px 30px 15px;
+  border-radius: 15px;
+  position: relative;
+  opacity: 0;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  animation: fadeInCard 400ms ease-out forwards;
+}
+.team .card-user:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--theme-blue);
+}
+
+.team .card-user .holder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+.team .card-user img {
+  margin: 5px 5px 15px 5px;
+  width: 100px;
+  border-radius: 5px;
+}
+.team .card-user .title {
+  width: 100%;
+  background: var(--bg-box-dark);
+  border-bottom: none;
+  margin: 0;
+  padding: 5px 0;
+  text-overflow: ellipsis;
+  max-width: 100px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  font-size: small;
+}
+.team .card-user .sub-title {
+  font-weight: bold;
+  font-size: small;
+  width: max-content;
+  padding: 5px 10px;
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -5px);
+  z-index: 1;
+}

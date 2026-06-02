@@ -1,0 +1,381 @@
+<div class="inner-container exports">
+  <div class="card">
+    <div class="holder">
+      <div class="title">Developer Exports</div>
+      <p>Looking to display Promotions like this in your project?:</p>
+      <div class="promo-wrapper">
+        <promo-space
+          type="image"
+          controls
+          ratio="360x120"
+          width="80%"
+        ></promo-space>
+      </div>
+      <p>
+        Use our Developer Exports! In this page, we'll document and direct you
+        on how to use the Community Spotlight Promotion Exports.
+      </p>
+    </div>
+  </div>
+  <div class="card-wide">
+    <div class="holder">
+      <div class="title">Downloads</div>
+      <span>
+        Prefer a local copy? Download the latest version of the Promotion
+        Exports below:
+      </span>
+      <div class="flex-div">
+        <button id="exports" class="btn-clear">
+          <img
+            draggable="false"
+            src="https://cdn.jsdelivr.net/gh/Community-Spotlight/assets/file-icon.svg"
+          />
+          <span>exports.js</span>
+        </button>
+        <button id="exports-min" class="btn-clear">
+          <img
+            draggable="false"
+            src="https://cdn.jsdelivr.net/gh/Community-Spotlight/assets/file-icon.svg"
+          />
+          <span>exports.min.js</span>
+        </button>
+      </div>
+      <span
+        >You can also browse the source code on the
+        <b>GitHub repository:</b>
+      </span>
+      <div class="flex-div">
+        <a
+          class="btn-clear"
+          href="https://github.com/Community-Spotlight/promotion-exports"
+        >
+          <img
+            src="https://cdn.jsdelivr.net/gh/Community-Spotlight/assets/CS-logo.svg"
+          />
+          <span>Exports</span>
+        </a>
+      </div>
+      <span>
+        Alternatively, you can load the Promotion Exports directly from a CDN
+        using a
+        <code>&lt;script&gt;</code> tag, as shown below.
+      </span>
+    </div>
+  </div>
+  <!-- DOCS setup -->
+  <div class="card-wide">
+    <div class="holder">
+      <div class="title">
+        <span>Documentation</span>
+        <br /><small>Setup [1]</small>
+      </div>
+      <p>
+        To get started, import the Promotion Exports script into your project.
+        You can either host a local copy yourself or load it directly from a CDN
+        using a
+        <code class="key-word">&lt;script&gt;</code> tag.
+      </p>
+      <p>
+        Our exports provides several utility functions which are both exposed
+        globally on &apos;<code class="key-word"
+          >window._communitySpotlight</code
+        >&apos;, and returned when locally imported.
+      </p>
+      <h3>Local Import <i>(Bundled or Direct Usage)</i></h3>
+      <pre
+        class="language-javascript"
+      ><code><span class="token keyword">async function</span> <span class="token function">importPromotionExports</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// If imported directly in your project:</span>
+  <span class="token keyword">const</span> csExports <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">/* Insert Exports code here... */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// OR, if already loaded globally:</span>
+  <span class="token keyword">const</span> csExports <span class="token operator">= window</span><span class="token punctuation">.</span>_communitySpotlight<span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Start the session</span>
+  <span class="token keyword">await</span> csExports<span class="token punctuation">.</span><span class="token function">startSession</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+      <h3>CDN Import</h3>
+      <pre
+        class="language-markup"
+      ><code><span class="token script language-javascript"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/gh/Community-Spotlight/promotion-exports/dist/community-spotlight.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span></code></pre>
+      <pre
+        class="language-javascript"
+      ><code><span class="token comment" spellcheck="true">// Access the global exports after the script loads</span>
+<span class="token keyword">const</span> csExports <span class="token operator">= window</span><span class="token punctuation">.</span>_communitySpotlight<span class="token punctuation">;</span>
+</code></pre>
+      <p>
+        With a CDN import, you <b>do not need</b> to manually call
+        <code class="key-word">startSession</code>, it gets initialized
+        automatically.
+      </p>
+    </div>
+  </div>
+  <!-- DOCS usage -->
+  <div class="card-wide">
+    <div class="holder">
+      <div class="title">
+        <span>Documentation</span>
+        <br /><small>Displaying Promotions in HTML [2]</small>
+      </div>
+      <p>
+        The exports register a custom HTML element called
+        <code class="key-word">promo-space</code>. When added to a page, it
+        automatically displays a Promotion without requiring any additional
+        JavaScript. You can also provide attributes to control what kind of
+        Promotion gets displayed.
+      </p>
+      <pre
+        class="language-markup center-code"
+      ><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>promo-space</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>promo-space</span><span class="token punctuation">&gt;</span></span></code></pre>
+      <p>
+        The next section will discuss various attributes that can be added to a
+        <code class="key-word">promo-space</code> element.
+      </p>
+      <div class="table-outer">
+        <table class="table-inner">
+          <tbody>
+            <tr>
+              <th>Attribute</th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td><code class="key-word">controls</code></td>
+              <td>
+                <p>
+                  Displays a control bar above the Promotion, providing
+                  additional controls and visual information.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">type</code></td>
+              <td>
+                <p>
+                  <b>Required.</b> Specifies the type of Promotion to display.
+                  Accepted values are <code class="key-word">image</code>,
+                  <code class="key-word">video</code>, and
+                  <code class="key-word">html</code>.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">ratio</code></td>
+              <td>
+                <p>
+                  <b>Required.</b> Filters Promotions by aspect ratio. A list of
+                  supported aspect ratios is provided below.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">length</code></td>
+              <td>
+                <p>
+                  <i
+                    >Used only when
+                    <code class="key-word">type="video"</code>.</i
+                  >
+                  Limits the maximum duration of videos that can be displayed.
+                  Accepted values are <code class="key-word">5</code>,
+                  <code class="key-word">10</code>,
+                  <code class="key-word">15</code>, and
+                  <code class="key-word">30</code>.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">tags</code></td>
+              <td>
+                <p>
+                  Overrides the global tag list (explained later) and filters
+                  which categories of Promotions may be displayed. Provide a
+                  comma-separated list of valid tags.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">width</code></td>
+              <td>
+                <p>Sets the width of the displayed Promotion.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">height</code></td>
+              <td>
+                <p>Sets the height of the displayed Promotion.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- DOCS utilities -->
+  <div class="card-wide">
+    <div class="holder">
+      <div class="title">
+        <span>Documentation</span>
+        <br /><small>Promotion Exports Utilities [3]</small>
+      </div>
+      <p>
+        As previously mentioned, our exports provides several utility functions
+        which are exposed globally on &apos;<code class="key-word"
+          >window._communitySpotlight</code
+        >&apos; and returned when locally imported.
+      </p>
+      <p>Now let&apos;s cover these utilities:</p>
+      <div class="table-outer">
+        <table class="table-inner">
+          <tbody>
+            <tr>
+              <th>Function</th>
+              <th>Description</th>
+              <th>Arguments</th>
+            </tr>
+            <tr>
+              <td><code class="key-word">startSession</code></td>
+              <td>
+                <p>Starts the Community Spotlight session.</p>
+              </td>
+              <td>None.</td>
+            </tr>
+            <tr>
+              <td><code class="key-word">setGlobalTagFilter</code></td>
+              <td>
+                <p>
+                  Sets the global tag filter used by all
+                  <code class="key-word">promo-space</code> elements that do not
+                  specify a <code class="key-word">tags</code> attribute. This
+                  filter determines which categories of Promotions are allowed
+                  to be displayed.
+                </p>
+              </td>
+              <td>
+                An array of category strings. A complete list of valid
+                categories can be found in the Uploader.
+              </td>
+            </tr>
+            <tr>
+              <td><code class="key-word">getAllPromos</code></td>
+              <td>
+                <p>
+                  Returns an array containing all available Promotions in their
+                  raw format, including all associated metadata.
+                </p>
+              </td>
+              <td>None.</td>
+            </tr>
+            <tr>
+              <td><code class="key-word">randomPromotion</code></td>
+              <td>
+                <p>
+                  Returns a random Promotion matching the supplied filters. The
+                  returned object is sanitized, meaning unnecessary metadata has
+                  been removed.
+                </p>
+              </td>
+              <td>
+                <ol class="list">
+                  <li>
+                    <code class="key-word">type</code>
+                    Promotion type:
+                    <code class="key-word">image</code>,
+                    <code class="key-word">video</code>, or
+                    <code class="key-word">html</code> <b>[Required]</b>
+                  </li>
+                  <li>
+                    <code class="key-word">ratio</code>: Supported aspect ratio
+                    string
+                  </li>
+                  <li>
+                    <code class="key-word">tags</code>: Array of category
+                    strings
+                  </li>
+                  <li>
+                    <code class="key-word">length</code>: Maximum video length:
+                    <code class="key-word">5</code>,
+                    <code class="key-word">10</code>,
+                    <code class="key-word">15</code>, or
+                    <code class="key-word">30</code>
+                  </li>
+                </ol>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- DOCS valid ratios -->
+  <div class="card">
+    <div class="holder">
+      <div class="title">
+        <span>Documentation</span>
+        <br /><small>Supported Promotion Aspect Ratios [4]</small>
+      </div>
+      <p>Here is a list of supported aspect ratios for each media type:</p>
+      <div class="table-outer">
+        <table class="table-inner">
+          <tbody>
+            <tr>
+              <th>Media Type</th>
+              <th>List</th>
+            </tr>
+            <tr>
+              <td><b>Image</b></td>
+              <td>
+                <ul class="list-empty">
+                  <li>250x250</li>
+                  <li>300x250</li>
+                  <li>480x270</li>
+                  <li>300x50</li>
+                  <li>50x300</li>
+                  <li>360x120</li>
+                  <li>120x360</li>
+                </ul>
+              </td>
+            </tr>
+            <tr>
+              <td><b>Video &amp; HTML</b></td>
+              <td>
+                <ul class="list-empty">
+                  <li>1:1</li>
+                  <li>4:3</li>
+                  <li>4:5</li>
+                  <li>16:9</li>
+                  <li>9:16</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="holder">
+      <div class="title">Donate</div>
+      <p>
+        Community Spotlight is free to use and maintained by volunteers. If
+        you'd like to support ongoing development and hosting costs, consider
+        making a donation.
+      </p>
+      <div class="btn-holder">
+        <a
+          id="donate-btn"
+          class="btn"
+          target="_blank"
+          href="https://www.paypal.com/donate/?business=AGLGGVQWUBUFE&no_recurring=0&item_name=Help+pay+for+my+College+Education&currency_code=CAD"
+        >
+          <div class="donate-shine"></div>
+          <img
+            src="https://www.paypalobjects.com/marketing/web/logos/paypal-mark-color.svg"
+            width="25px"
+          />
+          <span>Donate to Community Spotlight</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

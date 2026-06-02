@@ -1,0 +1,101 @@
+.exports .promo-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.exports .promo-wrapper promo-space {
+  border-radius: 12px;
+  border: solid 2px grey;
+}
+.exports .promo-wrapper .title {
+  border-bottom: unset;
+  font-family: unset;
+  font-size: unset;
+  padding-bottom: unset;
+  margin-bottom: unset;
+  text-align: left;
+}
+
+.exports .flex-div {
+  display: flex;
+  justify-content: center;
+}
+
+.exports .btn-clear {
+  margin: 15px 10px;
+  padding: 5px 15px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  font-family: Tilt Warp;
+  font-size: x-large;
+  border: 2px grey solid;
+  border-radius: 15px;
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+.exports .btn-clear:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--theme-green);
+}
+
+.exports .btn-clear img {
+  width: 50px;
+  margin-right: 10px;
+}
+
+.exports pre[class*="language-"] {
+  border-radius: 12px;
+  font-size: 0.8em;
+}
+
+.exports pre.center-code {
+  text-align: center;
+}
+
+.exports .key-word {
+  color: var(--theme-green);
+  filter: brightness(0.6);
+}
+body[data-dark="true"] .exports .key-word {
+  filter: unset;
+}
+
+.exports .list {
+  text-align: left;
+  align-self: left;
+}
+.exports .list-empty {
+  list-style: none;
+  padding: 0;
+}
+.exports [class^="list"] * {
+  margin-bottom: 10px;
+}
+
+.exports .table-outer {
+  display: flex;
+  justify-content: center;
+  border: solid 1px grey;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 15px 10px 15px;
+}
+.exports .table-inner {
+  align-self: center;
+  border-collapse: collapse;
+  width: 100%;
+}
+.exports .table-inner tbody th {
+  border: solid 1.5px grey;
+  padding: 10px;
+  background: rgba(120, 120, 120, 0.3);
+}
+.exports .table-inner tbody td {
+  border: solid 1.5px grey;
+  padding: 5px 10px;
+}

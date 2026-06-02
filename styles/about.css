@@ -1,0 +1,30 @@
+.inner-container.about .logo-img {
+  margin-bottom: 5px;
+}
+
+.inner-container.about .inline-img {
+  background-color: var(--bg-box);
+  padding: 10px;
+  border: solid grey 2px;
+  border-radius: 10px;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  display: grid;
+}
+.inner-container.about .inline-img img {
+  border-radius: 10px;
+  width: 100%;
+}
+
+.inner-container.about .contact-btn img {
+  margin-top: 25px;
+  width: 15%;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+  filter: drop-shadow(0 0 10px var(--bg-box));
+}
+.inner-container.about .contact-btn img:hover {
+  transform: scale(1.1);
+}
